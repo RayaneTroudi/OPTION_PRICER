@@ -1,24 +1,51 @@
 #ifndef EUROPEANOPTION_HPP
 #define EUROPEANOPTION_HPP  
 
-#include "Core/Option.hpp"
+#include "../Core/Option.hpp"
 
+/**
+ * @brief Abstract intermediate base class for European-style options (vanilla and some exotics).
+ * * It inherits time-to-maturity (T) and rate (r) and adds the Strike Price (K).
+ * It remains abstract because the specific payoff logic (Call vs. Put) is not implemented here.
+ */
 class EuropeanOption : public Option {
 
-    protected:
+protected:
 
-        double K; // Strike price
+    /**
+     * @brief The contractual price at which the asset can be bought or sold (Strike Price).
+     */
+    double K; 
 
-    public:
+public:
     
-        // Constructor
-        EuropeanOption(double T_in, double r_in, double K_in): Option(T_in, r_in), K(K_in) {}
+    // --- Constructor ---
+    
+    /**
+     * @brief Constructor for the European option base class.
+     * @param T_in Time to maturity, passed to Option base class.
+     * @param r_in Risk-free rate, passed to Option base class.
+     * @param K_in Strike Price.
+     */
+    EuropeanOption(double T_in, double r_in, double K_in): Option(T_in, r_in), K(K_in) {}
 
-        // virtual payoff method to be overridden by derived classes
-        virtual double payoff(const Path& path) const override = 0;
+    // --- Core Interface Method ---
 
-        // Getter for strike price
-        double getK() const { return K; }
+    /**
+     * @brief Pure virtual payoff method inherited from Option.
+     * It is redefined here to ensure all concrete European options implement it.
+     * @param path The simulated price path.
+     * @return The raw (undiscounted) payoff value.
+     */
+    virtual double payoff(const Path& path) const override = 0;
+
+    // --- Utility Method ---
+    
+    /**
+     * @brief Getter for the option's strike price.
+     * @return The strike price K.
+     */
+    double getK() const { return K; }
 };
 
-#endif
+#endif // EUROPEANOPTION_HPP

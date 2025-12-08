@@ -1,11 +1,16 @@
 #include "Models/AssetModel.hpp"
 
-// Le constructeur est la seule méthode non-virtuelle à implémenter ici.
-// Il appelle le constructeur de la classe de base (Option) et 
-// initialise les paramètres S0 et steps.
+// --- Constructor Implementation ---
+
+/**
+ * @brief Constructor for the AssetModel abstract base class.
+ * * It initializes the core asset simulation parameters (S0 and steps).
+ * @param S0_in Initial asset price.
+ * @param steps_in Number of discrete time steps.
+ */
 AssetModel::AssetModel(double S0_in, int steps_in)
     : S0(S0_in), steps(steps_in) 
 {}
 
-// NOTE : La méthode generatePath() n'est PAS implémentée ici car elle est
-// déclarée comme virtuelle pure dans AssetModel.hpp.
+// NOTE: The pure virtual method generatePath() must be implemented 
+// by concrete derived classes (like GBM.cpp) and is NOT defined here.
