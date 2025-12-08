@@ -1,0 +1,52 @@
+# Doxyfile for OPTION_PRICER Project
+
+# --- Project identification ---
+PROJECT_NAME           = "Option Pricer Monte Carlo"
+PROJECT_BRIEF          = "An Object-Oriented C++ Monte Carlo Option Pricer."
+PROJECT_LOGO           = 
+OUTPUT_DIRECTORY       = doc
+
+# --- Input/Output configuration ---
+# Where Doxygen should look for the source code and headers
+INPUT                  = include src main.cpp
+FILE_PATTERNS          = *.h \
+                         *.hpp \
+                         *.cpp
+RECURSIVE              = YES
+
+# Where the HTML output is generated
+HTML_OUTPUT            = html
+GENERATE_HTML          = YES
+
+# Disable LaTeX generation unless specifically required (speeds up generation)
+GENERATE_LATEX         = NO
+DISABLE_INDEX          = NO
+
+# --- Source Code settings ---
+# Define the programming language (C++ in this case)
+OPTIMIZE_OUTPUT_FOR_C  = NO
+OPTIMIZE_OUTPUT_JAVA   = NO
+OPTIMIZE_FOR_CPLUSPLUS = YES
+
+# --- Documentation content control ---
+# Force Doxygen to extract all details, even if comments are missing or partial
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+
+# Hide source code in the output documentation
+SOURCE_BROWSER         = NO
+
+# --- Preprocessor, Include and Library Path settings ---
+# This setting ensures Doxygen can find your headers correctly
+INCLUDE_PATH           = include
+
+# --- Doxygen style and layout ---
+# Use the common Javadoc style tags (e.g., @param, @brief)
+JAVADOC_AUTOBRIEF      = YES
+QT_AUTOBRIEF           = NO
+MULTILINE_CPP_IS_BRIEF = NO
+
+# --- Warnings and Messages ---
+WARNINGS               = YES
+QUIET                  = NO
