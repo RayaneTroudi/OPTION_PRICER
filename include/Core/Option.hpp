@@ -7,33 +7,75 @@
 
 #include "Core/Path.hpp"
 
+/**
+ * @brief Abstract base class for all derivative options (vanilla and exotic).
+ * * This class defines the common parameters (T, r) and the core interface 
+ * for payoff calculation. It cannot be instantiated directly.
+ */
 class Option{
 
-    protected: 
+protected: 
 
-        double T;
-        double r;
+    /**
+     * @brief Time to maturity (in years).
+     */
+    double T;
+    
+    /**
+     * @brief Risk-free interest rate (annualized).
+     */
+    double r;
 
-    public:
-        
-        // default constructor
-        Option(double T_in, double r_in) : T(T_in), r(r_in) {}
+public:
+    
+    // --- Constructor & Destructor ---
+    
+    /**
+     * @brief Constructor for the base option.
+     * @param T_in Time to maturity.
+     * @param r_in Risk-free rate.
+     */
+    Option(double T_in, double r_in) : T(T_in), r(r_in) {}
 
-        // default destructor
-        virtual ~Option() = default;
+    /**
+     * @brief Virtual destructor. Essential for polymorphism and proper memory cleanup 
+     * when deleting derived option objects via a base class pointer.
+     */
+    virtual ~Option() = default;
 
-        // virtual method for payoff calculation
-        virtual double payoff(const Path& path) const = 0;
+    // --- Core Interface Method ---
 
-        // getters
-        double getT() const { return T; }
-        double getR() const { return r; }
+    /**
+     * @brief Pure virtual method to calculate the option's payoff at maturity.
+     * Must be implemented by all concrete derived classes (e.g., EuropeanCall, AsianCall).
+     * @param path The simulated price path.
+     * @return The raw (undiscounted) payoff value.
+     */
+    virtual double payoff(const Path& path) const = 0;
 
-        // discount factor calculation 
-        double getDiscountFactor() const {
-            return std::exp(-r * T);
-        }
+    // --- Utility Methods ---
+
+    /**
+     * @brief Getter for the time to maturity.
+     * @return T.
+     */
+    double getT() const { return T; }
+    
+    /**
+     * @brief Getter for the risk-free rate.
+     * @return r.
+     */
+    double getR() const { return r; }
+
+    /**
+     * @brief Calculates the continuous compounding discount factor.
+     * Formula: exp(-r * T)
+     * @return The discount factor.
+     */
+    double getDiscountFactor() const {
+        return std::exp(-r * T);
+    }
 
 };
 
-#endif
+#endif // OPTION_HPP

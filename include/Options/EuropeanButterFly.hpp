@@ -28,8 +28,8 @@ public:
     
     /**
      * @brief Concrete implementation of the payoff calculation for the Call Butterfly.
-     * @param path The simulated price path (only the final price S_T is used).
-     * @return The raw (undiscounted) gain at maturity.
+     * @param path The simulated price path 
+     * @return The raw gain at maturity.
      */
     double payoff(const Path& path) const override;
 
