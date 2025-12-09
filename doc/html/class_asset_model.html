@@ -113,7 +113,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a2c246ca7cd07b072207132c0c5410c70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base constructor for common parameters.  <br /></td></tr>
 <tr class="memitem:a4bfbf1346cf21da2a36b4ba4aca127d1" id="r_a4bfbf1346cf21da2a36b4ba4aca127d1"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4bfbf1346cf21da2a36b4ba4aca127d1">~AssetModel</a> ()=default</td></tr>
 <tr class="memitem:af1ac7fa15ee36595a7630df4b093fc0c" id="r_af1ac7fa15ee36595a7630df4b093fc0c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af1ac7fa15ee36595a7630df4b093fc0c">generatePath</a> (double T) const =0</td></tr>
-<tr class="memdesc:af1ac7fa15ee36595a7630df4b093fc0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a single <a class="el" href="class_path.html">Path</a> of prices S_t according to the model's rules.  <br /></td></tr>
+<tr class="memdesc:af1ac7fa15ee36595a7630df4b093fc0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a single <a class="el" href="class_path.html" title="Represents a single simulated trajectory of asset prices over time.">Path</a> of prices S_t according to the model's rules.  <br /></td></tr>
 <tr class="memitem:aa11b0b73ae39148235d4f855275982ea" id="r_aa11b0b73ae39148235d4f855275982ea"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa11b0b73ae39148235d4f855275982ea">getS0</a> () const</td></tr>
 <tr class="memitem:a2e3cb09e98454872cdbc40d227699457" id="r_a2e3cb09e98454872cdbc40d227699457"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2e3cb09e98454872cdbc40d227699457">getSteps</a> () const</td></tr>
 </table><table class="memberdecls">
@@ -148,13 +148,24 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Base constructor for common parameters. </p>
+<p>Constructor for the <a class="el" href="class_asset_model.html" title="Abstract base class for asset price evolution models.">AssetModel</a> abstract base class.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">S0_in</td><td>Initial asset price. </td></tr>
-    <tr><td class="paramname">steps_in</td><td>Number of discrete time steps in the simulation. </td></tr>
+    <tr><td class="paramname">steps_in</td><td>Number of discrete time steps in the simulation.</td></tr>
   </table>
   </dd>
 </dl>
+<ul>
+<li>It initializes the core asset simulation parameters (S0 and steps). <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">S0_in</td><td>Initial asset price. </td></tr>
+    <tr><td class="paramname">steps_in</td><td>Number of discrete time steps. </td></tr>
+  </table>
+  </dd>
+</dl>
+</li>
+</ul>
 
 </div>
 </div>
@@ -207,14 +218,14 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Generates a single <a class="el" href="class_path.html">Path</a> of prices S_t according to the model's rules. </p>
+<p>Generates a single <a class="el" href="class_path.html" title="Represents a single simulated trajectory of asset prices over time.">Path</a> of prices S_t according to the model's rules. </p>
 <p>Must be implemented by concrete derived classes (e.g., <a class="el" href="class_g_b_m.html" title="Represents the Geometric Brownian Motion model for asset price simulation.">GBM</a>, Heston). </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">T</td><td>The option's time to maturity (needed to calculate time step dt = T/steps). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="class_path.html">Path</a> object containing the simulated price sequence. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="class_path.html" title="Represents a single simulated trajectory of asset prices over time.">Path</a> object containing the simulated price sequence. </dd></dl>
 
 <p>Implemented in <a class="el" href="class_g_b_m.html#ae69987a0c94ccdad138cc0fcc90e1dce">GBM</a>.</p>
 

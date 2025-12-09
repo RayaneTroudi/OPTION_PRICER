@@ -112,7 +112,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa96491a396dc9486dbf6183943b98d20" id="r_aa96491a396dc9486dbf6183943b98d20"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa96491a396dc9486dbf6183943b98d20">GBM</a> (double S0_in, int steps_in, double mu_in, double sigma_in)</td></tr>
 <tr class="memdesc:aa96491a396dc9486dbf6183943b98d20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs the <a class="el" href="class_g_b_m.html" title="Represents the Geometric Brownian Motion model for asset price simulation.">GBM</a> model.  <br /></td></tr>
 <tr class="memitem:ae69987a0c94ccdad138cc0fcc90e1dce" id="r_ae69987a0c94ccdad138cc0fcc90e1dce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae69987a0c94ccdad138cc0fcc90e1dce">generatePath</a> (double T) const override</td></tr>
-<tr class="memdesc:ae69987a0c94ccdad138cc0fcc90e1dce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a single <a class="el" href="class_path.html">Path</a> of prices using the <a class="el" href="class_g_b_m.html" title="Represents the Geometric Brownian Motion model for asset price simulation.">GBM</a> formula.  <br /></td></tr>
+<tr class="memdesc:ae69987a0c94ccdad138cc0fcc90e1dce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a single <a class="el" href="class_path.html" title="Represents a single simulated trajectory of asset prices over time.">Path</a> of prices using the <a class="el" href="class_g_b_m.html" title="Represents the Geometric Brownian Motion model for asset price simulation.">GBM</a> formula.  <br /></td></tr>
+<tr class="memitem:abba565d6103251e05914619dc99ff38f" id="r_abba565d6103251e05914619dc99ff38f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abba565d6103251e05914619dc99ff38f">getMu</a> () const</td></tr>
+<tr class="memdesc:abba565d6103251e05914619dc99ff38f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for the drift parameter (mu).  <br /></td></tr>
+<tr class="memitem:a1784353e526bef72dc370ff20be4aa6e" id="r_a1784353e526bef72dc370ff20be4aa6e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1784353e526bef72dc370ff20be4aa6e">getSigma</a> () const</td></tr>
+<tr class="memdesc:a1784353e526bef72dc370ff20be4aa6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for the volatility parameter (sigma).  <br /></td></tr>
 <tr class="inherit_header pub_methods_class_asset_model"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_asset_model')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="class_asset_model.html">AssetModel</a></td></tr>
 <tr class="memitem:a2c246ca7cd07b072207132c0c5410c70 inherit pub_methods_class_asset_model" id="r_a2c246ca7cd07b072207132c0c5410c70"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_asset_model.html#a2c246ca7cd07b072207132c0c5410c70">AssetModel</a> (double S0_in, int steps_in)</td></tr>
 <tr class="memdesc:a2c246ca7cd07b072207132c0c5410c70 inherit pub_methods_class_asset_model"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base constructor for common parameters.  <br /></td></tr>
@@ -167,15 +171,28 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Constructs the <a class="el" href="class_g_b_m.html" title="Represents the Geometric Brownian Motion model for asset price simulation.">GBM</a> model. </p>
+<p>Constructor for the Geometric Brownian Motion (<a class="el" href="class_g_b_m.html" title="Represents the Geometric Brownian Motion model for asset price simulation.">GBM</a>) model.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">S0_in</td><td>Initial asset price. </td></tr>
     <tr><td class="paramname">steps_in</td><td>Number of time steps. </td></tr>
     <tr><td class="paramname">mu_in</td><td>Drift (risk-neutral rate r or actual return). </td></tr>
-    <tr><td class="paramname">sigma_in</td><td>Volatility. </td></tr>
+    <tr><td class="paramname">sigma_in</td><td>Volatility.</td></tr>
   </table>
   </dd>
 </dl>
+<ul>
+<li>Calls the base class <a class="el" href="class_asset_model.html" title="Abstract base class for asset price evolution models.">AssetModel</a> constructor and initializes the specific parameters of the <a class="el" href="class_g_b_m.html" title="Represents the Geometric Brownian Motion model for asset price simulation.">GBM</a> process (mu and sigma). <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">S0_in</td><td>Initial asset price. </td></tr>
+    <tr><td class="paramname">steps_in</td><td>Number of time steps. </td></tr>
+    <tr><td class="paramname">mu_in</td><td>Drift parameter (often the risk-free rate 'r'). </td></tr>
+    <tr><td class="paramname">sigma_in</td><td>Volatility parameter. </td></tr>
+  </table>
+  </dd>
+</dl>
+</li>
+</ul>
 
 </div>
 </div>
@@ -203,16 +220,78 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Generates a single <a class="el" href="class_path.html">Path</a> of prices using the <a class="el" href="class_g_b_m.html" title="Represents the Geometric Brownian Motion model for asset price simulation.">GBM</a> formula. </p>
+<p>Generates a single <a class="el" href="class_path.html" title="Represents a single simulated trajectory of asset prices over time.">Path</a> of prices using the <a class="el" href="class_g_b_m.html" title="Represents the Geometric Brownian Motion model for asset price simulation.">GBM</a> formula. </p>
+<p>Generates a single <a class="el" href="class_path.html" title="Represents a single simulated trajectory of asset prices over time.">Path</a> of prices using the discrete-time <a class="el" href="class_g_b_m.html" title="Represents the Geometric Brownian Motion model for asset price simulation.">GBM</a> formula.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">T</td><td>The time to maturity. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The simulated <a class="el" href="class_path.html">Path</a> object. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The simulated <a class="el" href="class_path.html" title="Represents a single simulated trajectory of asset prices over time.">Path</a> object.</dd></dl>
+<p>The price update follows: S(t+dt) = S(t) * exp[ (mu - 0.5*sigma^2)dt + sigma*sqrt(dt)*Z ] </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">T</td><td>The time to maturity. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The simulated <a class="el" href="class_path.html" title="Represents a single simulated trajectory of asset prices over time.">Path</a> object. </dd></dl>
 
 <p>Implements <a class="el" href="class_asset_model.html#af1ac7fa15ee36595a7630df4b093fc0c">AssetModel</a>.</p>
+
+</div>
+</div>
+<a id="abba565d6103251e05914619dc99ff38f" name="abba565d6103251e05914619dc99ff38f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abba565d6103251e05914619dc99ff38f">&#9670;&#160;</a></span>getMu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GBM::getMu </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Getter for the drift parameter (mu). </p>
+
+</div>
+</div>
+<a id="a1784353e526bef72dc370ff20be4aa6e" name="a1784353e526bef72dc370ff20be4aa6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1784353e526bef72dc370ff20be4aa6e">&#9670;&#160;</a></span>getSigma()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GBM::getSigma </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Getter for the volatility parameter (sigma). </p>
 
 </div>
 </div>

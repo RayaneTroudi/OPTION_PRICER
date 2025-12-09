@@ -856,6 +856,7 @@ CMakeFiles/pricer_test.dir/main.cpp.o
  /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Models/RNG.hpp
  /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Core/Option.hpp
  /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Core/Path.hpp
+ /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/EuropeanButterFly.hpp
  /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/EuropeanCall.hpp
  /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/EuropeanOption.hpp
  /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Core/Option.hpp

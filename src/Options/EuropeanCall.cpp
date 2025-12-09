@@ -30,4 +30,4 @@ double EuropeanCall::payoff(const Path& path) const {
     // 2. Return the maximum of (S_T - K) and zero
     // K (Strike) is accessible because it is 'protected' in the base class EuropeanOption.
     return std::max(S_T - K, 0.0);
-};
+}; 

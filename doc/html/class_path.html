@@ -93,25 +93,43 @@ $(function(){initNavTree('class_path.html','','class_path-members'); });
 </div><!--header-->
 <div class="contents">
 
+<p>Represents a single simulated trajectory of asset prices over time.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_path_8hpp_source.html">Path.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6ae58f503394f12a90ff7d059d30d26c" id="r_a6ae58f503394f12a90ff7d059d30d26c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ae58f503394f12a90ff7d059d30d26c">Path</a> ()=default</td></tr>
+<tr class="memdesc:a6ae58f503394f12a90ff7d059d30d26c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
 <tr class="memitem:a952c2c25751bcc453d076dd0a5f7173a" id="r_a952c2c25751bcc453d076dd0a5f7173a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a952c2c25751bcc453d076dd0a5f7173a">Path</a> (const std::vector&lt; double &gt; &amp;prices_in)</td></tr>
+<tr class="memdesc:a952c2c25751bcc453d076dd0a5f7173a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameterized constructor.  <br /></td></tr>
 <tr class="memitem:a14b9982643086d71fda934f05bbcc471" id="r_a14b9982643086d71fda934f05bbcc471"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a14b9982643086d71fda934f05bbcc471">getFinalPrice</a> () const</td></tr>
+<tr class="memdesc:a14b9982643086d71fda934f05bbcc471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the price at the end of the path (S_T).  <br /></td></tr>
 <tr class="memitem:a083db9c0583918f9ee883f3090b268d3" id="r_a083db9c0583918f9ee883f3090b268d3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a083db9c0583918f9ee883f3090b268d3">getAveragePrice</a> () const</td></tr>
+<tr class="memdesc:a083db9c0583918f9ee883f3090b268d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the average price over all time steps in the path.  <br /></td></tr>
 <tr class="memitem:ad07a8daa21647c789958fd59f63231bc" id="r_ad07a8daa21647c789958fd59f63231bc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad07a8daa21647c789958fd59f63231bc">getMaxPrice</a> () const</td></tr>
+<tr class="memdesc:ad07a8daa21647c789958fd59f63231bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the maximum price reached during the path.  <br /></td></tr>
 <tr class="memitem:a3808eae2a07004d783bd62c5db746edc" id="r_a3808eae2a07004d783bd62c5db746edc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3808eae2a07004d783bd62c5db746edc">getMinPrice</a> () const</td></tr>
+<tr class="memdesc:a3808eae2a07004d783bd62c5db746edc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the minimum price reached during the path.  <br /></td></tr>
 <tr class="memitem:a716ec98f925d4e6ea6f0ac1f7b83ac2f" id="r_a716ec98f925d4e6ea6f0ac1f7b83ac2f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a716ec98f925d4e6ea6f0ac1f7b83ac2f">getLength</a> () const</td></tr>
+<tr class="memdesc:a716ec98f925d4e6ea6f0ac1f7b83ac2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total number of price points stored (steps + 1).  <br /></td></tr>
 <tr class="memitem:a2979901d9ee6f75027076d965160f421" id="r_a2979901d9ee6f75027076d965160f421"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2979901d9ee6f75027076d965160f421">at</a> (size_t index) const</td></tr>
+<tr class="memdesc:a2979901d9ee6f75027076d965160f421"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesses the price at a specific time step index.  <br /></td></tr>
 <tr class="memitem:aff441efbe95bd9b6f1bf790d65455901" id="r_aff441efbe95bd9b6f1bf790d65455901"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff441efbe95bd9b6f1bf790d65455901">data</a> ()</td></tr>
+<tr class="memdesc:aff441efbe95bd9b6f1bf790d65455901"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a non-const reference to the internal data vector.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-attribs" class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a04561aa02a4211ef4ecd530cd0794264" id="r_a04561aa02a4211ef4ecd530cd0794264"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a04561aa02a4211ef4ecd530cd0794264">prices</a></td></tr>
+<tr class="memdesc:a04561aa02a4211ef4ecd530cd0794264"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal storage for the asset price sequence.  <br /></td></tr>
 </table>
-<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a single simulated trajectory of asset prices over time. </p>
+<ul>
+<li>This class stores a sequence of discrete price points S_t from t=0 to T. It provides utility methods required by path-dependent options (Asian, Lookback). </li>
+</ul>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6ae58f503394f12a90ff7d059d30d26c" name="a6ae58f503394f12a90ff7d059d30d26c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6ae58f503394f12a90ff7d059d30d26c">&#9670;&#160;</a></span>Path() <span class="overload">[1/2]</span></h2>
 
@@ -135,6 +153,8 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Default constructor. </p>
+
 </div>
 </div>
 <a id="a952c2c25751bcc453d076dd0a5f7173a" name="a952c2c25751bcc453d076dd0a5f7173a"></a>
@@ -151,6 +171,24 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Parameterized constructor. </p>
+<p>Parameterized constructor for the <a class="el" href="class_path.html" title="Represents a single simulated trajectory of asset prices over time.">Path</a> class.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">prices_in</td><td>The vector containing the sequence of discrete prices.</td></tr>
+  </table>
+  </dd>
+</dl>
+<ul>
+<li>Initializes the internal price vector with the provided sequence. <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">prices_in</td><td>The vector containing the sequence of discrete prices. </td></tr>
+  </table>
+  </dd>
+</dl>
+</li>
+</ul>
 
 </div>
 </div>
@@ -169,6 +207,25 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Accesses the price at a specific time step index. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The step index (0 for S0, Length-1 for S_T). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The price S_t at the given index.</dd></dl>
+<ul>
+<li>Uses std::vector::at() which performs bounds checking (throws std::out_of_range if index is invalid). <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The step index (0 for S0, Length-1 for S_T). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The price S_t at the given index. </dd></dl>
+</li>
+</ul>
 
 </div>
 </div>
@@ -195,6 +252,10 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Provides a non-const reference to the internal data vector. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Use with caution. Primarily for advanced internal manipulation. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A mutable reference to the underlying std::vector&lt;double&gt;. </dd></dl>
+
 </div>
 </div>
 <a id="a083db9c0583918f9ee883f3090b268d3" name="a083db9c0583918f9ee883f3090b268d3"></a>
@@ -211,6 +272,20 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Calculates the average price over all time steps in the path. </p>
+<p>Calculates the arithmetic average price over all time steps in the path.</p>
+<p>This is required for Asian options (Average Rate Options). </p><dl class="section return"><dt>Returns</dt><dd>The arithmetic mean of all prices in the path. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::out_of_range</td><td>If the path is empty.</td></tr>
+  </table>
+  </dd>
+</dl>
+<ul>
+<li>Uses std::accumulate for efficient summation. <dl class="section return"><dt>Returns</dt><dd>The arithmetic mean of all prices, or 0.0 if the path is empty. </dd></dl>
+</li>
+</ul>
 
 </div>
 </div>
@@ -229,6 +304,19 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Retrieves the price at the end of the path (S_T). </p>
+<p>This is typically used by European (vanilla) options. </p><dl class="section return"><dt>Returns</dt><dd>The final price S_T. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::out_of_range</td><td>If the path is empty.</td></tr>
+  </table>
+  </dd>
+</dl>
+<ul>
+<li>Uses std::vector::back() for O(1) complexity. <dl class="section return"><dt>Returns</dt><dd>The final price S_T, or 0.0 if the path is empty. </dd></dl>
+</li>
+</ul>
+
 </div>
 </div>
 <a id="a716ec98f925d4e6ea6f0ac1f7b83ac2f" name="a716ec98f925d4e6ea6f0ac1f7b83ac2f"></a>
@@ -245,6 +333,10 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Gets the total number of price points stored (steps + 1). </p>
+<p>Gets the total number of price points stored (number of time steps + 1).</p>
+<dl class="section return"><dt>Returns</dt><dd>The size of the internal price vector. </dd></dl>
 
 </div>
 </div>
@@ -263,6 +355,19 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Finds the maximum price reached during the path. </p>
+<p>This is required for Lookback options. </p><dl class="section return"><dt>Returns</dt><dd>The maximum price S_max. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::out_of_range</td><td>If the path is empty.</td></tr>
+  </table>
+  </dd>
+</dl>
+<ul>
+<li>Uses std::max_element to find the largest price. <dl class="section return"><dt>Returns</dt><dd>The maximum price S_max, or 0.0 if the path is empty. </dd></dl>
+</li>
+</ul>
+
 </div>
 </div>
 <a id="a3808eae2a07004d783bd62c5db746edc" name="a3808eae2a07004d783bd62c5db746edc"></a>
@@ -279,6 +384,19 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Finds the minimum price reached during the path. </p>
+<p>This is required for Lookback options. </p><dl class="section return"><dt>Returns</dt><dd>The minimum price S_min. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::out_of_range</td><td>If the path is empty.</td></tr>
+  </table>
+  </dd>
+</dl>
+<ul>
+<li>Uses std::min_element to find the smallest price. <dl class="section return"><dt>Returns</dt><dd>The minimum price S_min, or 0.0 if the path is empty. </dd></dl>
+</li>
+</ul>
 
 </div>
 </div>
@@ -302,6 +420,9 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Internal storage for the asset price sequence. </p>
+<p>The size is typically steps + 1 (including S0). </p>
 
 </div>
 </div>

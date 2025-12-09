@@ -812,10 +812,11 @@ CMakeFiles/pricer_test.dir/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/usr/include/c++/v1/execution \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/usr/include/c++/v1/__type_traits/is_execution_policy.h \
   /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Core/Option.hpp \
-  /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/EuropeanCall.hpp \
-  /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/EuropeanOption.hpp \
+  /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/EuropeanButterFly.hpp \
   /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/../Core/Option.hpp \
   /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/../Core/Path.hpp \
+  /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/EuropeanCall.hpp \
+  /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/EuropeanOption.hpp \
   /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Models/AssetModel.hpp \
   /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Models/../Core/Path.hpp \
   /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Models/GBM.hpp \

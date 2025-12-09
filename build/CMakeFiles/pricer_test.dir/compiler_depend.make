@@ -855,6 +855,7 @@ CMakeFiles/pricer_test.dir/main.cpp.o: /Users/rayane_macbook_pro/Documents/Prog_
   /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Models/RNG.hpp \
   /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Core/Option.hpp \
   /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Core/Path.hpp \
+  /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/EuropeanButterFly.hpp \
   /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/EuropeanCall.hpp \
   /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/EuropeanOption.hpp \
   /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Core/Option.hpp \
@@ -8253,8 +8254,6 @@ CMakeFiles/pricer_test.dir/src/PricingEngine/MonteCarloPricer.cpp.o: /Users/raya
 
 /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/Options/EuropeanCall.cpp:
 
-/Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/EuropeanButterFly.hpp:
-
 /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/Options/EuropeanButterFly.cpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/usr/include/c++/v1/forward_list:
@@ -8272,6 +8271,8 @@ CMakeFiles/pricer_test.dir/src/PricingEngine/MonteCarloPricer.cpp.o: /Users/raya
 /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/PricingEngine/GreeksPricer.hpp:
 
 /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/EuropeanCall.hpp:
+
+/Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Options/EuropeanButterFly.hpp:
 
 /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/include/Models/GBM.hpp:
 

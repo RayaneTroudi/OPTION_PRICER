@@ -93,6 +93,9 @@ $(function(){initNavTree('class_option.html','','class_option-members'); });
 </div><!--header-->
 <div class="contents">
 
+<p>Abstract base class for all derivative options (vanilla and exotic).  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_option_8hpp_source.html">Option.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Option:</div>
@@ -100,26 +103,41 @@ Inheritance diagram for Option:</div>
  <div class="center">
   <img src="class_option.png" usemap="#Option_map" alt=""/>
   <map id="Option_map" name="Option_map">
-<area href="class_european_option.html" alt="EuropeanOption" shape="rect" coords="0,56,104,80"/>
-<area href="class_european_call.html" alt="EuropeanCall" shape="rect" coords="0,112,104,136"/>
+<area href="class_butterfly_option.html" title="Represents a Long Call Butterfly Option." alt="ButterflyOption" shape="rect" coords="0,56,104,80"/>
+<area href="class_european_option.html" title="Abstract intermediate base class for European-style options (vanilla and some exotics)." alt="EuropeanOption" shape="rect" coords="114,56,218,80"/>
+<area href="class_european_call.html" title="Represents a European Call Option (Option d&#39;Achat Européenne)." alt="EuropeanCall" shape="rect" coords="57,112,161,136"/>
+<area href="class_european_put.html" title="Represents a European Put option (Option de Vente Européenne)." alt="EuropeanPut" shape="rect" coords="171,112,275,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a7070f2a943b4f7909c0d241b5ae2d5fb" id="r_a7070f2a943b4f7909c0d241b5ae2d5fb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7070f2a943b4f7909c0d241b5ae2d5fb">Option</a> (double T_in, double r_in)</td></tr>
+<tr class="memdesc:a7070f2a943b4f7909c0d241b5ae2d5fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the base option.  <br /></td></tr>
 <tr class="memitem:a2d59b443118133479f111ed04b614a5d" id="r_a2d59b443118133479f111ed04b614a5d"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d59b443118133479f111ed04b614a5d">~Option</a> ()=default</td></tr>
+<tr class="memdesc:a2d59b443118133479f111ed04b614a5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
 <tr class="memitem:a8ef8a1788b5794f2407f7f4c4b590215" id="r_a8ef8a1788b5794f2407f7f4c4b590215"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ef8a1788b5794f2407f7f4c4b590215">payoff</a> (const <a class="el" href="class_path.html">Path</a> &amp;path) const =0</td></tr>
+<tr class="memdesc:a8ef8a1788b5794f2407f7f4c4b590215"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual method to calculate the option's payoff at maturity.  <br /></td></tr>
 <tr class="memitem:a89e8c76ac7a2ce2351c00de08623f2d4" id="r_a89e8c76ac7a2ce2351c00de08623f2d4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89e8c76ac7a2ce2351c00de08623f2d4">getT</a> () const</td></tr>
+<tr class="memdesc:a89e8c76ac7a2ce2351c00de08623f2d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for the time to maturity.  <br /></td></tr>
 <tr class="memitem:a305e1a933d2fc5f0e23e9b3280527dfa" id="r_a305e1a933d2fc5f0e23e9b3280527dfa"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a305e1a933d2fc5f0e23e9b3280527dfa">getR</a> () const</td></tr>
+<tr class="memdesc:a305e1a933d2fc5f0e23e9b3280527dfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for the risk-free rate.  <br /></td></tr>
 <tr class="memitem:a567af54da204429ffb43c0264735acc7" id="r_a567af54da204429ffb43c0264735acc7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a567af54da204429ffb43c0264735acc7">getDiscountFactor</a> () const</td></tr>
+<tr class="memdesc:a567af54da204429ffb43c0264735acc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the continuous compounding discount factor.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ae583dd6d430a3b428014efa942605d54" id="r_ae583dd6d430a3b428014efa942605d54"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae583dd6d430a3b428014efa942605d54">T</a></td></tr>
+<tr class="memdesc:ae583dd6d430a3b428014efa942605d54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time to maturity (in years).  <br /></td></tr>
 <tr class="memitem:abd44ab56edddcd59f80ca5c60c9b66f0" id="r_abd44ab56edddcd59f80ca5c60c9b66f0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd44ab56edddcd59f80ca5c60c9b66f0">r</a></td></tr>
+<tr class="memdesc:abd44ab56edddcd59f80ca5c60c9b66f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Risk-free interest rate (annualized).  <br /></td></tr>
 </table>
-<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Abstract base class for all derivative options (vanilla and exotic). </p>
+<ul>
+<li>This class defines the common parameters (T, r) and the core interface for payoff calculation. It cannot be instantiated directly. </li>
+</ul>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7070f2a943b4f7909c0d241b5ae2d5fb" name="a7070f2a943b4f7909c0d241b5ae2d5fb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7070f2a943b4f7909c0d241b5ae2d5fb">&#9670;&#160;</a></span>Option()</h2>
 
@@ -147,6 +165,15 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Constructor for the base option. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">T_in</td><td>Time to maturity. </td></tr>
+    <tr><td class="paramname">r_in</td><td>Risk-free rate. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a2d59b443118133479f111ed04b614a5d" name="a2d59b443118133479f111ed04b614a5d"></a>
@@ -171,6 +198,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Virtual destructor. </p>
+<p>Essential for polymorphism and proper memory cleanup when deleting derived option objects via a base class pointer. </p>
 
 </div>
 </div>
@@ -198,6 +228,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Calculates the continuous compounding discount factor. </p>
+<p>Formula: exp(-r * T) </p><dl class="section return"><dt>Returns</dt><dd>The discount factor. </dd></dl>
+
 </div>
 </div>
 <a id="a305e1a933d2fc5f0e23e9b3280527dfa" name="a305e1a933d2fc5f0e23e9b3280527dfa"></a>
@@ -222,6 +255,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Getter for the risk-free rate. </p>
+<dl class="section return"><dt>Returns</dt><dd>r. </dd></dl>
 
 </div>
 </div>
@@ -248,6 +284,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Getter for the time to maturity. </p>
+<dl class="section return"><dt>Returns</dt><dd>T. </dd></dl>
+
 </div>
 </div>
 <a id="a8ef8a1788b5794f2407f7f4c4b590215" name="a8ef8a1788b5794f2407f7f4c4b590215"></a>
@@ -273,7 +312,16 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_european_call.html#a580bd39177fa2264f265e23f2949247e">EuropeanCall</a>, and <a class="el" href="class_european_option.html#a205bca7d6385fff911ab9bbb3381a8b7">EuropeanOption</a>.</p>
+<p>Pure virtual method to calculate the option's payoff at maturity. </p>
+<p>Must be implemented by all concrete derived classes (e.g., <a class="el" href="class_european_call.html" title="Represents a European Call Option (Option d&#39;Achat Européenne).">EuropeanCall</a>, AsianCall). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>The simulated price path. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The raw (undiscounted) payoff value. </dd></dl>
+
+<p>Implemented in <a class="el" href="class_butterfly_option.html#a887b6e0b1efe55f3215a205502174265">ButterflyOption</a>, <a class="el" href="class_european_call.html#a580bd39177fa2264f265e23f2949247e">EuropeanCall</a>, <a class="el" href="class_european_option.html#a205bca7d6385fff911ab9bbb3381a8b7">EuropeanOption</a>, and <a class="el" href="class_european_put.html#a2b3323e39f38e00db2bf79247da44b30">EuropeanPut</a>.</p>
 
 </div>
 </div>
@@ -298,6 +346,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Risk-free interest rate (annualized). </p>
+
 </div>
 </div>
 <a id="ae583dd6d430a3b428014efa942605d54" name="ae583dd6d430a3b428014efa942605d54"></a>
@@ -319,6 +369,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Time to maturity (in years). </p>
 
 </div>
 </div>

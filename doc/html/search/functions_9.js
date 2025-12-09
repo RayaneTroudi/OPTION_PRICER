@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['_7eassetmodel_0',['~AssetModel',['../class_asset_model.html#a4bfbf1346cf21da2a36b4ba4aca127d1',1,'AssetModel']]],
-  ['_7eoption_1',['~Option',['../class_option.html#a2d59b443118133479f111ed04b614a5d',1,'Option']]]
+  ['rng_0',['RNG',['../class_r_n_g.html#a0028b717ff3d402a5829fc09ab1c5ed4',1,'RNG::RNG()'],['../class_r_n_g.html#aaa8799ce373af44249a117dc59e1be97',1,'RNG::RNG(const RNG &amp;)=delete']]]
 ];

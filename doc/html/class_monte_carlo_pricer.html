@@ -134,13 +134,24 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Construit le pricer en prenant des références aux interfaces abstraites. </p>
+<p>Constructs the Monte Carlo Pricer by linking to the <a class="el" href="class_option.html" title="Abstract base class for all derivative options (vanilla and exotic).">Option</a> and <a class="el" href="class_asset_model.html" title="Abstract base class for asset price evolution models.">AssetModel</a> interfaces.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">option_in</td><td>L'option à pricer (interface abstraite <a class="el" href="class_option.html">Option</a>). </td></tr>
-    <tr><td class="paramname">model_in</td><td>Le modèle de simulation à utiliser (interface abstraite <a class="el" href="class_asset_model.html" title="Abstract base class for asset price evolution models.">AssetModel</a>). </td></tr>
+    <tr><td class="paramname">option_in</td><td>L'option à pricer (interface abstraite <a class="el" href="class_option.html" title="Abstract base class for all derivative options (vanilla and exotic).">Option</a>). </td></tr>
+    <tr><td class="paramname">model_in</td><td>Le modèle de simulation à utiliser (interface abstraite <a class="el" href="class_asset_model.html" title="Abstract base class for asset price evolution models.">AssetModel</a>).</td></tr>
   </table>
   </dd>
 </dl>
+<ul>
+<li>This allows the pricer to work generically with any concrete <a class="el" href="class_option.html" title="Abstract base class for all derivative options (vanilla and exotic).">Option</a> (Call, Put, Butterfly) and any <a class="el" href="class_asset_model.html" title="Abstract base class for asset price evolution models.">AssetModel</a> (<a class="el" href="class_g_b_m.html" title="Represents the Geometric Brownian Motion model for asset price simulation.">GBM</a>, Heston, etc.) through polymorphism. <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">option_in</td><td>The option to be priced. </td></tr>
+    <tr><td class="paramname">model_in</td><td>The asset model to be used for path generation. </td></tr>
+  </table>
+  </dd>
+</dl>
+</li>
+</ul>
 
 </div>
 </div>
@@ -161,13 +172,24 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Lance la simulation de Monte Carlo. </p>
+<p>Executes the Monte Carlo simulation to estimate the option price.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">num_simulations</td><td>Nombre de trajectoires à générer. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Un objet <a class="el" href="class_pricing_result.html" title="Structure/Classe pour stocker et rapporter les résultats de la simulation Monte Carlo.">PricingResult</a> contenant le prix, l'erreur standard et la distribution. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Un objet <a class="el" href="class_pricing_result.html" title="Structure/Classe pour stocker et rapporter les résultats de la simulation Monte Carlo.">PricingResult</a> contenant le prix, l'erreur standard et la distribution.</dd></dl>
+<ul>
+<li>The process involves generating paths, calculating payoffs, averaging, and discounting. It also computes the Standard Error of the Mean (SEM) for confidence interval estimation. <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">num_simulations</td><td>The number of paths to generate (N). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="class_pricing_result.html" title="Structure/Classe pour stocker et rapporter les résultats de la simulation Monte Carlo.">PricingResult</a> object containing the price, standard error, and payoff distribution. </dd></dl>
+</li>
+</ul>
 
 </div>
 </div>

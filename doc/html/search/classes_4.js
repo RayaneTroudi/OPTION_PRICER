@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['option_0',['Option',['../class_option.html',1,'']]]
+  ['montecarlopricer_0',['MonteCarloPricer',['../class_monte_carlo_pricer.html',1,'']]]
 ];
