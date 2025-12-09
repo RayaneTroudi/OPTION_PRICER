@@ -1,40 +1,45 @@
 #ifndef MONTECARLOPRICER_HPP
 #define MONTECARLOPRICER_HPP
 
-// Inclusion des interfaces abstraites et du résultat
+// Inclusion of abstract interfaces and the result structure
 #include "../Core/Option.hpp"
 #include "../Models/AssetModel.hpp"
 #include "PricingResult.hpp"
 
 /**
- * @brief Le moteur de pricing utilisant la méthode de Monte Carlo.
- * Il est chargé d'exécuter les simulations et de calculer le prix actualisé.
+ * @brief The pricing engine using the Monte Carlo method.
+ * It is responsible for executing simulations and calculating the discounted price.
  */
 class MonteCarloPricer {
-public:
-    // --- Constructeur ---
-    
-    /**
-     * @brief Construit le pricer en prenant des références aux interfaces abstraites.
-     * @param option_in L'option à pricer (interface abstraite Option).
-     * @param model_in Le modèle de simulation à utiliser (interface abstraite AssetModel).
-     */
-    MonteCarloPricer(const Option& option_in, const AssetModel& model_in);
 
-    // --- Méthode de Pricing ---
-    
-    /**
-     * @brief Lance la simulation de Monte Carlo.
-     * @param num_simulations Nombre de trajectoires à générer.
-     * @return Un objet PricingResult contenant le prix, l'erreur standard et la distribution.
-     */
-    PricingResult calculatePrice(int num_simulations) const;
+    public:
 
-private:
-    // Les références (const) permettent au pricer de travailler avec n'importe quelle 
-    // implémentation concrète d'Option ou d'AssetModel (polymorphisme).
-    const Option& option;
-    const AssetModel& model;
+        /**
+         * @brief Constructs the pricer by taking references to abstract interfaces.
+         * @param option_in The option to be priced (Option abstract interface).
+         * @param model_in The simulation model to use (AssetModel abstract interface).
+         */
+        MonteCarloPricer(const Option& option_in, const AssetModel& model_in);
+
+        /**
+         * @brief Launches the standard Monte Carlo simulation.
+         * @param num_simulations Number of paths to generate.
+         * @return A PricingResult object containing the price, standard error, and distribution.
+         */
+        PricingResult calculatePrice(int num_simulations) const;
+
+        /**
+         * @brief Executes the Monte Carlo simulation using the Antithetic Variates method (Min Var).
+         * * The number of path pairs generated is num_simulations / 2.
+         * @param num_simulations The TOTAL number of paths (standard + antithetic). Must be even.
+         * @return A PricingResult object.
+         */
+        PricingResult calculatePriceMinVar(int num_simulations) const; // <-- New method
+
+    private:
+
+        const Option& option;
+        const AssetModel& model;
 };
 
-#endif // MONTECARLOPRICER_HPP
+#endif

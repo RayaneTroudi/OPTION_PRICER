@@ -9,25 +9,23 @@
  * * This is a concrete class implementing the specific payoff logic.
  */
 class EuropeanPut : public EuropeanOption {
-public:
-    // --- Constructor ---
-    
-    /**
-     * @brief Constructor. Initializes T, r, and K via the base class.
-     * @param T Time to maturity.
-     * @param r Risk-free rate.
-     * @param K Strike Price.
-     */
-    EuropeanPut(double T, double r, double K);
 
-    // --- Virtual Method Implementation ---
-    
-    /**
-     * @brief Concrete implementation of the payoff calculation: max(K - S_T, 0).
-     * @param path The simulated price path (only the final price S_T is used).
-     * @return The raw (undiscounted) gain at maturity.
-     */
-    double payoff(const Path& path) const override;
-};
+    public:
+        
+        /**
+         * @brief Constructor. Initializes T, r, and K via the base class.
+         * @param T Time to maturity.
+         * @param r Risk-free rate.
+         * @param K Strike Price.
+         */
+        EuropeanPut(double T, double r, double K);
 
-#endif // EUROPEANPUT_HPP
+        /**
+         * @brief Concrete implementation of the payoff calculation: max(K - S_T, 0).
+         * @param path The simulated price path (only the final price S_T is used).
+         * @return The raw (undiscounted) gain at maturity.
+         */
+        double payoff(const Path& path) const override;
+    };
+
+#endif 

@@ -10,40 +10,36 @@
  * ensuring consistent random number generation.
  */
 class RNG {
-public:
-    // --- Singleton Access ---
 
-    /**
-     * @brief Provides the single instance of the RNG class.
-     */
-    static RNG& getInstance();
+    public:
 
-    // --- Generator Method ---
-    
-    /**
-     * @brief Generates a single random number drawn from a Standard Normal Distribution (N(0, 1)).
-     * @return A double representing the random variable Z.
-     */
-    double getStandardNormal();
+        /**
+         * @brief Provides the single instance of the RNG class.
+         */
+        static RNG& getInstance();
+     
+        /**
+         * @brief Generates a single random number drawn from a Standard Normal Distribution (N(0, 1)).
+         * @return A double representing the random variable Z.
+         */
+        double getStandardNormal();
 
-private:
-    // --- Private Constructor & Members for Singleton ---
+    private:
 
-    /**
-     * @brief Private Constructor (ensures only one instance can be created).
-     * Initializes the random engine and distribution.
-     */
-    RNG();
-    
-    // Delete copy constructor and assignment operator to enforce Singleton
-    RNG(const RNG&) = delete;
-    RNG& operator=(const RNG&) = delete;
+        /**
+         * @brief Private Constructor (ensures only one instance can be created).
+         * Initializes the random engine and distribution.
+         */
+        RNG();
+        
+        RNG(const RNG&) = delete;
+        RNG& operator=(const RNG&) = delete;
 
-    // Mersenne Twister Engine (good statistical properties and speed)
-    std::mt19937 generator;
+        // Mersenne Twister Engine (good statistical properties and speed)
+        std::mt19937 generator;
 
-    // Normal Distribution for N(0, 1)
-    std::normal_distribution<double> normal_dist;
+        // Normal Distribution for N(0, 1)
+        std::normal_distribution<double> normal_dist;
 };
 
-#endif // RNG_HPP
+#endif 

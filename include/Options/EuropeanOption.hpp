@@ -10,42 +10,37 @@
  */
 class EuropeanOption : public Option {
 
-protected:
+    protected:
 
-    /**
-     * @brief The contractual price at which the asset can be bought or sold (Strike Price).
-     */
-    double K; 
+        /**
+         * @brief The contractual price at which the asset can be bought or sold (Strike Price).
+         */
+        double K; 
 
-public:
-    
-    // --- Constructor ---
-    
-    /**
-     * @brief Constructor for the European option base class.
-     * @param T_in Time to maturity, passed to Option base class.
-     * @param r_in Risk-free rate, passed to Option base class.
-     * @param K_in Strike Price.
-     */
-    EuropeanOption(double T_in, double r_in, double K_in): Option(T_in, r_in), K(K_in) {}
+    public:
 
-    // --- Core Interface Method ---
+        /**
+         * @brief Constructor for the European option base class.
+         * @param T_in Time to maturity, passed to Option base class.
+         * @param r_in Risk-free rate, passed to Option base class.
+         * @param K_in Strike Price.
+         */
+        EuropeanOption(double T_in, double r_in, double K_in): Option(T_in, r_in), K(K_in) {}
 
-    /**
-     * @brief Pure virtual payoff method inherited from Option.
-     * It is redefined here to ensure all concrete European options implement it.
-     * @param path The simulated price path.
-     * @return The raw (undiscounted) payoff value.
-     */
-    virtual double payoff(const Path& path) const override = 0;
+        /**
+         * @brief Pure virtual payoff method inherited from Option.
+         * It is redefined here to ensure all concrete European options implement it.
+         * @param path The simulated price path.
+         * @return The raw (undiscounted) payoff value.
+         */
+        virtual double payoff(const Path& path) const override = 0;
 
-    // --- Utility Method ---
-    
-    /**
-     * @brief Getter for the option's strike price.
-     * @return The strike price K.
-     */
-    double getK() const { return K; }
+        /**
+         * @brief Getter for the option's strike price.
+         * @return The strike price K.
+         */
+        double getK() const { return K; }
+        
 };
 
 #endif // EUROPEANOPTION_HPP

@@ -4,29 +4,10 @@
 #include <vector>
 #include <algorithm>
 
-// --- Constructor ---
-
-/**
- * @brief Constructor for the Geometric Brownian Motion (GBM) model.
- * * Calls the base class AssetModel constructor and initializes the specific
- * parameters of the GBM process (mu and sigma).
- * @param S0_in Initial asset price.
- * @param steps_in Number of time steps.
- * @param mu_in Drift parameter (often the risk-free rate 'r').
- * @param sigma_in Volatility parameter.
- */
 GBM::GBM(double S0_in, int steps_in, double mu_in, double sigma_in)
     : AssetModel(S0_in, steps_in), mu(mu_in), sigma(sigma_in) 
 {}
 
-// --- Path Generation Implementation ---
-
-/**
- * @brief Generates a single Path of prices using the discrete-time GBM formula.
- * The price update follows: S(t+dt) = S(t) * exp[ (mu - 0.5*sigma^2)dt + sigma*sqrt(dt)*Z ]
- * @param T The time to maturity.
- * @return The simulated Path object.
- */
 Path GBM::generatePath(double T) const {
     
     // 1. Calculate the time step size (dt = T / steps)
@@ -63,4 +44,47 @@ Path GBM::generatePath(double T) const {
     
     // 6. Return the constructed Path object
     return Path(prices_data);
+}
+
+std::pair<Path, Path> GBM::generateMinVarPaths(double T) const {
+    
+    // 1. Pré-calcul des constantes
+    double dt = T / steps; 
+    double drift_term = (mu - 0.5 * sigma * sigma) * dt;
+    double vol_term_factor = sigma * std::sqrt(dt);
+
+    // 2. Initialisation des deux trajectoires
+    std::vector<double> prices_std;
+    std::vector<double> prices_anti;
+    prices_std.reserve(steps + 1);
+    prices_anti.reserve(steps + 1);
+    
+    // Initialisation des prix (S0 est commun)
+    prices_std.push_back(S0); 
+    prices_anti.push_back(S0);
+    
+    double current_price_std = S0;
+    double current_price_anti = S0;
+
+    // 3. Boucle de simulation (N/2 itérations nécessaires si on génère les paires)
+    for (int i = 0; i < steps; ++i) {
+        
+        // A. Générer un seul nombre normal Z
+        double Z = RNG::getInstance().getStandardNormal(); 
+        
+        // B. Calculer les termes stochastiques pour Z et -Z
+        double stoch_term_std = vol_term_factor * Z;    // Terme standard
+        double stoch_term_anti = vol_term_factor * (-Z); // Terme antithétique
+        
+        // C. Mettre à jour le chemin standard (utilise Z)
+        current_price_std *= std::exp(drift_term + stoch_term_std);
+        prices_std.push_back(current_price_std);
+
+        // D. Mettre à jour le chemin antithétique (utilise -Z)
+        current_price_anti *= std::exp(drift_term + stoch_term_anti);
+        prices_anti.push_back(current_price_anti);
+    }
+    
+    // 4. Retourner la paire de chemins
+    return std::make_pair(Path(prices_std), Path(prices_anti));
 }
