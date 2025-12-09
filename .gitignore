@@ -1,0 +1,43 @@
+# --- Fichiers et dossiers générés par le build system (CMake/Make) ---
+
+# Ignore le répertoire de compilation CMake (build/) et ses variantes
+# Ceci contient tous les fichiers intermédiaires, les caches et les exécutables.
+build/
+Debug/
+Release/
+bin/
+out/
+*.o
+*.so
+*.a
+*.dll
+
+# Fichiers de configuration CMake générés dans l'arborescence (à ignorer)
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+
+# --- Fichiers et dossiers générés par Doxygen ---
+
+# Ignore le dossier de sortie de Doxygen (contenant le HTML/Latex)
+doc/
+html/
+latex/
+
+# --- Exécutables/Scripts générés ---
+
+# Les exécutables finaux du projet
+pricer_test
+run_tests
+
+# --- Fichiers temporaires des IDE et OS ---
+
+# MacOS
+.DS_Store
+
+# VS Code/Visual Studio
+.vscode/
+*.suo
+*.user
+*.bak
