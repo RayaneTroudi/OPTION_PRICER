@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <stdexcept>
 
-// Define M_PI if it's not defined by the cmath implementation
+
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif

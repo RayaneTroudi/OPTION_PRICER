@@ -6,8 +6,9 @@
 // --- CORE/OPTIONS ---
 #include "Core/Path.hpp"
 #include "Core/Option.hpp"
-#include "Core/AnalyticPriced.hpp" // <-- Nouveau
+#include "Core/AnalyticPriced.hpp" 
 #include "Options/EuropeanCall.hpp" 
+#include "Options/AsianOption.hpp"
 
 // --- MODELS ---
 #include "Models/AssetModel.hpp"
@@ -19,8 +20,6 @@
 #include "PricingEngine/PricingResult.hpp"
 #include "PricingEngine/GreeksPricer.hpp" 
 
-// NOTE: BlackScholesFormulas.hpp n'est plus nécessaire dans main.cpp car les méthodes 
-// sont appelées via l'objet Call lui-même (meilleure encapsulation).
 
 int main() {
     
@@ -109,6 +108,15 @@ int main() {
     std::cout << "   Gamma (FDM) :            " << gamma_fdm << "\n";
     
     std::cout << "------------------------------------------------------\n";
+
+    AsianOption asian_call(T, r, K);
+    const Option& asian_option = asian_call;
+    MonteCarloPricer asian_pricer(asian_option, gbm);
+    std::cout << "-> Pricing Asian Call Option (Arithmetic Average):\n";
+    PricingResult asian_result = asian_pricer.calculatePrice(NUM_SIMULATIONS);
+    std::cout << "   Price V (Asian Call):    " << asian_result.price << "\n";
+    std::cout << "   Standard Error (SEM):    " << asian_result.standard_error << "\n";
+
     
     return 0;
 }
