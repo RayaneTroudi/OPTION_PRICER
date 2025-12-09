@@ -6,25 +6,26 @@
  * for their Greeks (sensitivities) under the Black-Scholes model.
  */
 class AnalyticPriced {
-public:
-    virtual ~AnalyticPriced() = default;
 
-    // --- Price method REMOVED ---
+    public:
 
-    /**
-     * @brief Calculates the analytical Delta.
-     */
-    virtual double getAnalyticDelta(double S, double sigma) const = 0; 
-    
-    /**
-     * @brief Calculates the analytical Gamma.
-     */
-    virtual double getAnalyticGamma(double S, double sigma) const = 0;
+        virtual ~AnalyticPriced() = default;
 
-    /**
-     * @brief Calculates the analytical Vega.
-     */
-    virtual double getAnalyticVega(double S, double sigma) const = 0;
-};
+        /**
+         * @brief Calculates the analytical Delta.
+         */
+        virtual double getAnalyticDelta(double S, double sigma) const = 0; 
+        
+        /**
+         * @brief Calculates the analytical Gamma.
+         */
+        virtual double getAnalyticGamma(double S, double sigma) const = 0;
+
+        /**
+         * @brief Calculates the analytical Vega.
+         */
+        virtual double getAnalyticVega(double S, double sigma) const = 0;
+
+    };
 
 #endif 
