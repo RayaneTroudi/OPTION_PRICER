@@ -2,14 +2,15 @@
 #define EUROPEANCALL_HPP    
 
 #include "EuropeanOption.hpp" 
-#include "../Core/Path.hpp"   
+#include "../Core/Path.hpp" 
+#include "Core/AnalyticPriced.hpp"  
 
 /**
  * @brief Represents a European Call Option (Option d'Achat Européenne).
  * * This is a concrete class that implements the specific payoff function 
  * for a basic vanilla call option: max(S_T - K, 0).
  */
-class EuropeanCall : public EuropeanOption {
+class EuropeanCall : public EuropeanOption, public AnalyticPriced {
 
     public:
 
@@ -28,6 +29,32 @@ class EuropeanCall : public EuropeanOption {
          * @return The raw (undiscounted) payoff value at maturity.
          */
         double payoff(const Path& path) const override;
+
+        /** 
+         * @brief Calculates the analytical Delta using the Black-Scholes formula.
+         * @param S Current asset price.
+         * @param sigma Volatility of the underlying asset.
+         * @return The analytical Delta value.
+         */
+        double getAnalyticDelta(double S, double sigma) const override; 
+
+        /**
+         * @brief Get the Analytic Gamma object
+         * 
+         * @param S 
+         * @param sigma 
+         * @return double 
+         */
+        double getAnalyticGamma(double S, double sigma) const override;
+
+        /**
+         * @brief Get the Analytic Vega object
+         * 
+         * @param S 
+         * @param sigma 
+         * @return double 
+         */
+        double getAnalyticVega(double S, double sigma) const override;
 };
 
 

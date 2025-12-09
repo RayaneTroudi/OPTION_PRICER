@@ -1,10 +1,12 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
+#include <stdexcept>
 
 // --- CORE/OPTIONS ---
 #include "Core/Path.hpp"
 #include "Core/Option.hpp"
+#include "Core/AnalyticPriced.hpp" // <-- Nouveau
 #include "Options/EuropeanCall.hpp" 
 
 // --- MODELS ---
@@ -17,8 +19,8 @@
 #include "PricingEngine/PricingResult.hpp"
 #include "PricingEngine/GreeksPricer.hpp" 
 
-// --- UTILS (Analytic Greeks) ---
-#include "Utils/BlackScholesFormulas.hpp" 
+// NOTE: BlackScholesFormulas.hpp n'est plus nécessaire dans main.cpp car les méthodes 
+// sont appelées via l'objet Call lui-même (meilleure encapsulation).
 
 int main() {
     
@@ -36,7 +38,7 @@ int main() {
     const int NUM_SIMULATIONS = 100000; 
 
     // Epsilon for Finite Difference Method (FDM)
-    const double EPSILON = 0.001 * S0; // 0.1% of S0
+    const double EPSILON = 0.001 * S0; 
 
     std::cout << "--- Monte Carlo Pricing Comparison (European Call) ---\n";
     std::cout << "S0: " << S0 << ", K: " << K << ", T: " << T << ", sigma: " << sigma << "\n";
@@ -46,27 +48,28 @@ int main() {
 
     // --- 3. OBJECT INSTANTIATION ---
     RNG::getInstance(); 
-    EuropeanCall call(T, r, K);
+    
+    // On travaille avec l'objet concret EuropeanCall
+    EuropeanCall call_concrete(T, r, K); 
+    
+    // On peut utiliser la référence abstraite pour le pricer
+    const Option& call = call_concrete; 
+
     GBM gbm(S0, STEPS, r, sigma); 
     MonteCarloPricer pricer(call, gbm);
     GreeksPricer greeks_pricer(call, gbm);
 
-    // 4. PRICING STANDARD (NO VARIANCE REDUCTION)
+    // 4. PRICING (STANDARD & MIN VAR)
     
     std::cout << "-> Pricing STANDARD ...\n";
     PricingResult result_std = pricer.calculatePrice(NUM_SIMULATIONS);
-    
+    // ... (affichage standard) ...
     std::cout << "   Price V (Standard):      " << result_std.price << "\n";
     std::cout << "   Standard Error (SEM):    " << result_std.standard_error << "\n";
     
-    // 5. PRICING MIN VAR (ANTITHETIC VARIATES)
-
     std::cout << "\n-> Pricing REDUCTION VARIANCE ...\n";
     PricingResult result_minvar = pricer.calculatePriceMinVar(NUM_SIMULATIONS);
-    
-    // Calculate SEM reduction in percentage
     double sem_reduction = (result_std.standard_error - result_minvar.standard_error) / result_std.standard_error * 100.0;
-
     std::cout << "   Price V (Min Var):       " << result_minvar.price << "\n";
     std::cout << "   Standard Error (SEM):    " << result_minvar.standard_error << "\n";
     std::cout << "   SEM Reduction achieved:  " << std::setprecision(2) << sem_reduction << "%" << std::setprecision(5) << "\n";
@@ -77,14 +80,21 @@ int main() {
 
     std::cout << "-> GREEKS CALCULATION (ANALYTIC / Black-Scholes):\n";
     
-    // Analytic Greeks serve as the true benchmark
-    double delta_bs = BlackScholesFormulas::deltaCall(S0, K, T, r, sigma);
-    double gamma_bs = BlackScholesFormulas::gammaCallPut(S0, K, T, r, sigma);
-    double vega_bs = BlackScholesFormulas::vegaCallPut(S0, K, T, r, sigma);
+    // TENTATIVE D'ACCÈS AUX MÉTHODES ANALYTIQUES VIA dynamic_cast
+    const AnalyticPriced* analytic_option = dynamic_cast<const AnalyticPriced*>(&call);
 
-    std::cout << "   Delta (Analytic) :       " << delta_bs << "\n";
-    std::cout << "   Gamma (Analytic) :       " << gamma_bs << "\n";
-    std::cout << "   Vega (Analytic) :        " << vega_bs << "\n";
+    if (analytic_option) {
+        // L'objet est bien une option 'vanille' supportant l'analyse BS.
+        double delta_bs = analytic_option->getAnalyticDelta(S0, sigma);
+        double gamma_bs = analytic_option->getAnalyticGamma(S0, sigma);
+        double vega_bs = analytic_option->getAnalyticVega(S0, sigma);
+
+        std::cout << "   Delta (Analytic) :       " << delta_bs << "\n";
+        std::cout << "   Gamma (Analytic) :       " << gamma_bs << "\n";
+        std::cout << "   Vega (Analytic) :        " << vega_bs << "\n";
+    } else {
+        std::cout << "   [Option non analytique. Impossible d'utiliser les formules BS.]\n";
+    }
     
     std::cout << "------------------------------------------------------\n";
     
