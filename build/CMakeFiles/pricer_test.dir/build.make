@@ -139,10 +139,24 @@ CMakeFiles/pricer_test.dir/src/Models/RNG.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pricer_test.dir/src/Models/RNG.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/Models/RNG.cpp -o CMakeFiles/pricer_test.dir/src/Models/RNG.cpp.s
 
+CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.o: CMakeFiles/pricer_test.dir/flags.make
+CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.o: /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/Options/EuropeanButterFly.cpp
+CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.o: CMakeFiles/pricer_test.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.o -MF CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.o.d -o CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.o -c /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/Options/EuropeanButterFly.cpp
+
+CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/Options/EuropeanButterFly.cpp > CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.i
+
+CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/Options/EuropeanButterFly.cpp -o CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.s
+
 CMakeFiles/pricer_test.dir/src/Options/EuropeanCall.cpp.o: CMakeFiles/pricer_test.dir/flags.make
 CMakeFiles/pricer_test.dir/src/Options/EuropeanCall.cpp.o: /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/Options/EuropeanCall.cpp
 CMakeFiles/pricer_test.dir/src/Options/EuropeanCall.cpp.o: CMakeFiles/pricer_test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pricer_test.dir/src/Options/EuropeanCall.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pricer_test.dir/src/Options/EuropeanCall.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pricer_test.dir/src/Options/EuropeanCall.cpp.o -MF CMakeFiles/pricer_test.dir/src/Options/EuropeanCall.cpp.o.d -o CMakeFiles/pricer_test.dir/src/Options/EuropeanCall.cpp.o -c /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/Options/EuropeanCall.cpp
 
 CMakeFiles/pricer_test.dir/src/Options/EuropeanCall.cpp.i: cmake_force
@@ -153,10 +167,38 @@ CMakeFiles/pricer_test.dir/src/Options/EuropeanCall.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pricer_test.dir/src/Options/EuropeanCall.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/Options/EuropeanCall.cpp -o CMakeFiles/pricer_test.dir/src/Options/EuropeanCall.cpp.s
 
+CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.o: CMakeFiles/pricer_test.dir/flags.make
+CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.o: /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/Options/EuropeanPut.cpp
+CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.o: CMakeFiles/pricer_test.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.o -MF CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.o.d -o CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.o -c /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/Options/EuropeanPut.cpp
+
+CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/Options/EuropeanPut.cpp > CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.i
+
+CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/Options/EuropeanPut.cpp -o CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.s
+
+CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.o: CMakeFiles/pricer_test.dir/flags.make
+CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.o: /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/PricingEngine/GreeksPricer.cpp
+CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.o: CMakeFiles/pricer_test.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.o -MF CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.o.d -o CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.o -c /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/PricingEngine/GreeksPricer.cpp
+
+CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/PricingEngine/GreeksPricer.cpp > CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.i
+
+CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/PricingEngine/GreeksPricer.cpp -o CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.s
+
 CMakeFiles/pricer_test.dir/src/PricingEngine/MonteCarloPricer.cpp.o: CMakeFiles/pricer_test.dir/flags.make
 CMakeFiles/pricer_test.dir/src/PricingEngine/MonteCarloPricer.cpp.o: /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/PricingEngine/MonteCarloPricer.cpp
 CMakeFiles/pricer_test.dir/src/PricingEngine/MonteCarloPricer.cpp.o: CMakeFiles/pricer_test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pricer_test.dir/src/PricingEngine/MonteCarloPricer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/pricer_test.dir/src/PricingEngine/MonteCarloPricer.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pricer_test.dir/src/PricingEngine/MonteCarloPricer.cpp.o -MF CMakeFiles/pricer_test.dir/src/PricingEngine/MonteCarloPricer.cpp.o.d -o CMakeFiles/pricer_test.dir/src/PricingEngine/MonteCarloPricer.cpp.o -c /Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/src/PricingEngine/MonteCarloPricer.cpp
 
 CMakeFiles/pricer_test.dir/src/PricingEngine/MonteCarloPricer.cpp.i: cmake_force
@@ -174,7 +216,10 @@ pricer_test_OBJECTS = \
 "CMakeFiles/pricer_test.dir/src/Models/AssetModel.cpp.o" \
 "CMakeFiles/pricer_test.dir/src/Models/GBM.cpp.o" \
 "CMakeFiles/pricer_test.dir/src/Models/RNG.cpp.o" \
+"CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.o" \
 "CMakeFiles/pricer_test.dir/src/Options/EuropeanCall.cpp.o" \
+"CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.o" \
+"CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.o" \
 "CMakeFiles/pricer_test.dir/src/PricingEngine/MonteCarloPricer.cpp.o"
 
 # External object files for target pricer_test
@@ -185,11 +230,14 @@ pricer_test: CMakeFiles/pricer_test.dir/src/Core/Path.cpp.o
 pricer_test: CMakeFiles/pricer_test.dir/src/Models/AssetModel.cpp.o
 pricer_test: CMakeFiles/pricer_test.dir/src/Models/GBM.cpp.o
 pricer_test: CMakeFiles/pricer_test.dir/src/Models/RNG.cpp.o
+pricer_test: CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.o
 pricer_test: CMakeFiles/pricer_test.dir/src/Options/EuropeanCall.cpp.o
+pricer_test: CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.o
+pricer_test: CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.o
 pricer_test: CMakeFiles/pricer_test.dir/src/PricingEngine/MonteCarloPricer.cpp.o
 pricer_test: CMakeFiles/pricer_test.dir/build.make
 pricer_test: CMakeFiles/pricer_test.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable pricer_test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/rayane_macbook_pro/Documents/Prog_ENSAE/C++/OPTION_PRICER/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable pricer_test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pricer_test.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

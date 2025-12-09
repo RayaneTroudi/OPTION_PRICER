@@ -249,6 +249,30 @@ src/Models/RNG.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pricer_test.dir/build.make CMakeFiles/pricer_test.dir/src/Models/RNG.cpp.s
 .PHONY : src/Models/RNG.cpp.s
 
+src/Options/EuropeanButterFly.o: src/Options/EuropeanButterFly.cpp.o
+.PHONY : src/Options/EuropeanButterFly.o
+
+# target to build an object file
+src/Options/EuropeanButterFly.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pricer_test.dir/build.make CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.o
+.PHONY : src/Options/EuropeanButterFly.cpp.o
+
+src/Options/EuropeanButterFly.i: src/Options/EuropeanButterFly.cpp.i
+.PHONY : src/Options/EuropeanButterFly.i
+
+# target to preprocess a source file
+src/Options/EuropeanButterFly.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pricer_test.dir/build.make CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.i
+.PHONY : src/Options/EuropeanButterFly.cpp.i
+
+src/Options/EuropeanButterFly.s: src/Options/EuropeanButterFly.cpp.s
+.PHONY : src/Options/EuropeanButterFly.s
+
+# target to generate assembly for a file
+src/Options/EuropeanButterFly.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pricer_test.dir/build.make CMakeFiles/pricer_test.dir/src/Options/EuropeanButterFly.cpp.s
+.PHONY : src/Options/EuropeanButterFly.cpp.s
+
 src/Options/EuropeanCall.o: src/Options/EuropeanCall.cpp.o
 .PHONY : src/Options/EuropeanCall.o
 
@@ -272,6 +296,54 @@ src/Options/EuropeanCall.s: src/Options/EuropeanCall.cpp.s
 src/Options/EuropeanCall.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pricer_test.dir/build.make CMakeFiles/pricer_test.dir/src/Options/EuropeanCall.cpp.s
 .PHONY : src/Options/EuropeanCall.cpp.s
+
+src/Options/EuropeanPut.o: src/Options/EuropeanPut.cpp.o
+.PHONY : src/Options/EuropeanPut.o
+
+# target to build an object file
+src/Options/EuropeanPut.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pricer_test.dir/build.make CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.o
+.PHONY : src/Options/EuropeanPut.cpp.o
+
+src/Options/EuropeanPut.i: src/Options/EuropeanPut.cpp.i
+.PHONY : src/Options/EuropeanPut.i
+
+# target to preprocess a source file
+src/Options/EuropeanPut.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pricer_test.dir/build.make CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.i
+.PHONY : src/Options/EuropeanPut.cpp.i
+
+src/Options/EuropeanPut.s: src/Options/EuropeanPut.cpp.s
+.PHONY : src/Options/EuropeanPut.s
+
+# target to generate assembly for a file
+src/Options/EuropeanPut.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pricer_test.dir/build.make CMakeFiles/pricer_test.dir/src/Options/EuropeanPut.cpp.s
+.PHONY : src/Options/EuropeanPut.cpp.s
+
+src/PricingEngine/GreeksPricer.o: src/PricingEngine/GreeksPricer.cpp.o
+.PHONY : src/PricingEngine/GreeksPricer.o
+
+# target to build an object file
+src/PricingEngine/GreeksPricer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pricer_test.dir/build.make CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.o
+.PHONY : src/PricingEngine/GreeksPricer.cpp.o
+
+src/PricingEngine/GreeksPricer.i: src/PricingEngine/GreeksPricer.cpp.i
+.PHONY : src/PricingEngine/GreeksPricer.i
+
+# target to preprocess a source file
+src/PricingEngine/GreeksPricer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pricer_test.dir/build.make CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.i
+.PHONY : src/PricingEngine/GreeksPricer.cpp.i
+
+src/PricingEngine/GreeksPricer.s: src/PricingEngine/GreeksPricer.cpp.s
+.PHONY : src/PricingEngine/GreeksPricer.s
+
+# target to generate assembly for a file
+src/PricingEngine/GreeksPricer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pricer_test.dir/build.make CMakeFiles/pricer_test.dir/src/PricingEngine/GreeksPricer.cpp.s
+.PHONY : src/PricingEngine/GreeksPricer.cpp.s
 
 src/PricingEngine/MonteCarloPricer.o: src/PricingEngine/MonteCarloPricer.cpp.o
 .PHONY : src/PricingEngine/MonteCarloPricer.o
@@ -321,9 +393,18 @@ help:
 	@echo "... src/Models/RNG.o"
 	@echo "... src/Models/RNG.i"
 	@echo "... src/Models/RNG.s"
+	@echo "... src/Options/EuropeanButterFly.o"
+	@echo "... src/Options/EuropeanButterFly.i"
+	@echo "... src/Options/EuropeanButterFly.s"
 	@echo "... src/Options/EuropeanCall.o"
 	@echo "... src/Options/EuropeanCall.i"
 	@echo "... src/Options/EuropeanCall.s"
+	@echo "... src/Options/EuropeanPut.o"
+	@echo "... src/Options/EuropeanPut.i"
+	@echo "... src/Options/EuropeanPut.s"
+	@echo "... src/PricingEngine/GreeksPricer.o"
+	@echo "... src/PricingEngine/GreeksPricer.i"
+	@echo "... src/PricingEngine/GreeksPricer.s"
 	@echo "... src/PricingEngine/MonteCarloPricer.o"
 	@echo "... src/PricingEngine/MonteCarloPricer.i"
 	@echo "... src/PricingEngine/MonteCarloPricer.s"
