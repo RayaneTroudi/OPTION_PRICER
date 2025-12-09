@@ -17,6 +17,9 @@
 #include "PricingEngine/PricingResult.hpp"
 #include "PricingEngine/GreeksPricer.hpp" 
 
+// --- UTILS (Analytic Greeks) ---
+#include "Utils/BlackScholesFormulas.hpp" 
+
 int main() {
     
     std::cout << std::fixed << std::setprecision(5);
@@ -30,7 +33,7 @@ int main() {
     
     // --- 2. PARAMÈTRES DE SIMULATION ---
     const int STEPS = 100;           
-    const int NUM_SIMULATIONS = 100000; // Total number of paths (must be even for Min Var)
+    const int NUM_SIMULATIONS = 100000; 
 
     // Epsilon for Finite Difference Method (FDM)
     const double EPSILON = 0.001 * S0; // 0.1% of S0
@@ -38,6 +41,7 @@ int main() {
     std::cout << "--- Monte Carlo Pricing Comparison (European Call) ---\n";
     std::cout << "S0: " << S0 << ", K: " << K << ", T: " << T << ", sigma: " << sigma << "\n";
     std::cout << "Total Simulations (N): " << NUM_SIMULATIONS << "\n";
+    std::cout << "FDM Epsilon (d^S): " << EPSILON << "\n";
     std::cout << "------------------------------------------------------\n";
 
     // --- 3. OBJECT INSTANTIATION ---
@@ -67,17 +71,33 @@ int main() {
     std::cout << "   Standard Error (SEM):    " << result_minvar.standard_error << "\n";
     std::cout << "   SEM Reduction achieved:  " << std::setprecision(2) << sem_reduction << "%" << std::setprecision(5) << "\n";
 
-    std::cout << "------------------------------------------------------\n";
+    std::cout << "======================================================\n";
+    
+    // 6. GREEKS CALCULATION (Analytic Formulas)
 
-    // 6. GREEKS CALCULATION (Using FDM)
+    std::cout << "-> GREEKS CALCULATION (ANALYTIC / Black-Scholes):\n";
     
-    std::cout << "-> GREEKS CALCULATION (FDM, epsilon=" << EPSILON << "):\n";
+    // Analytic Greeks serve as the true benchmark
+    double delta_bs = BlackScholesFormulas::deltaCall(S0, K, T, r, sigma);
+    double gamma_bs = BlackScholesFormulas::gammaCallPut(S0, K, T, r, sigma);
+    double vega_bs = BlackScholesFormulas::vegaCallPut(S0, K, T, r, sigma);
+
+    std::cout << "   Delta (Analytic) :       " << delta_bs << "\n";
+    std::cout << "   Gamma (Analytic) :       " << gamma_bs << "\n";
+    std::cout << "   Vega (Analytic) :        " << vega_bs << "\n";
     
-    double delta = greeks_pricer.calculateDelta(NUM_SIMULATIONS, EPSILON);
-    double gamma = greeks_pricer.calculateGamma(NUM_SIMULATIONS, EPSILON);
+    std::cout << "------------------------------------------------------\n";
     
-    std::cout << "   Delta (∂V/∂S) :          " << delta << "\n";
-    std::cout << "   Gamma (∂²V/∂S²) :        " << gamma << "\n";
+    // 7. GREEKS CALCULATION (FDM)
+    
+    std::cout << "-> GREEKS CALCULATION (NUMERIC / FDM):\n";
+    
+    double delta_fdm = greeks_pricer.calculateDelta(NUM_SIMULATIONS, EPSILON);
+    double gamma_fdm = greeks_pricer.calculateGamma(NUM_SIMULATIONS, EPSILON);
+    
+    std::cout << "   Delta (FDM) :            " << delta_fdm << "\n";
+    std::cout << "   Gamma (FDM) :            " << gamma_fdm << "\n";
+    
     std::cout << "------------------------------------------------------\n";
     
     return 0;
