@@ -32,3 +32,6 @@ target_link_libraries(plot_path pricer_lib)
 # C. Convergence et Réduction de Variance (nécessite apps/show_convergence.cpp)
 add_executable(show_convergence apps/show_convergence.cpp)
 target_link_libraries(show_convergence pricer_lib)
+
+add_executable(compare_mc_edp apps/compare_mc_edp.cpp)
+target_link_libraries(compare_mc_edp pricer_lib)

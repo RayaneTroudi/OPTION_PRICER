@@ -1,14 +1,14 @@
 #include "Options/EuropeanButterFly.hpp"
 #include <algorithm> // For std::max
 
-ButterflyOption::ButterflyOption(double T_in, double r_in, double K1_in, double K2_in, double K3_in)
+EuropeanButterFly::EuropeanButterFly(double T_in, double r_in, double K1_in, double K2_in, double K3_in)
     // Call the base class constructor (Option)
     : Option(T_in, r_in), K1(K1_in), K2(K2_in), K3(K3_in) 
 {
     // A check could be added here to ensure K1 < K2 < K3 for a standard butterfly.
 }
 
-double ButterflyOption::payoff(const Path& path) const {
+double EuropeanButterFly::payoff(const Path& path) const {
     // 1. Get the final price S_T
     double S_T = path.getFinalPrice(); 
     

@@ -1,108 +1,178 @@
 #include <iostream>
-#include <cmath>
+#include <memory>
+#include <limits>
 #include <iomanip>
-#include <stdexcept>
+#include <string>
 
-// --- CORE/OPTIONS ---
-#include "Core/Path.hpp"
+// --- CORE & INTERFACES ---
 #include "Core/Option.hpp"
-#include "Core/AnalyticPriced.hpp" 
-#include "Options/EuropeanCall.hpp" 
+#include "Core/AnalyticPriced.hpp"
+#include "Core/Path.hpp"
+
+// --- OPTIONS IMPLEMENTATIONS ---
+#include "Options/EuropeanCall.hpp"
+#include "Options/EuropeanPut.hpp"
+#include "Options/EuropeanBullCallSpread.hpp"
+#include "Options/EuropeanButterFly.hpp"
 #include "Options/AsianOption.hpp"
 
-// --- MODELS ---
-#include "Models/AssetModel.hpp"
+// --- MODELS & ENGINES ---
 #include "Models/GBM.hpp"
-#include "Models/RNG.hpp" 
-
-// --- PRICING ENGINE ---
+#include "Models/RNG.hpp"
 #include "PricingEngine/MonteCarloPricer.hpp"
-#include "PricingEngine/PricingResult.hpp"
-#include "PricingEngine/GreeksPricer.hpp" 
+#include "PricingEngine/GreeksPricer.hpp"
 
-// --- UTILITIES ---
+// --- UTILS ---
 #include "Utils/GnuplotExporter.hpp"
 
-int main() {
-    
-    std::cout << std::fixed << std::setprecision(5);
+// --- FONCTIONS DE VALIDATION ---
 
-    // --- 1. PARAMÈTRES FINANCIERS ---
-    const double S0 = 100.0;     // Initial Price
-    const double K = 105.0;      // Strike Price
-    const double T = 1.0;        // Time to Maturity
-    const double r = 0.05;       // Risk-free Rate
-    const double sigma = 0.20;   // Volatility
-    
-    // --- 2. PARAMÈTRES DE SIMULATION ---
-    const int STEPS = 100;           
-    const int NUM_SIMULATIONS = 100000; 
-
-    // Epsilon for Finite Difference Method (FDM)
-    const double EPSILON = 0.001 * S0; 
-
-    std::cout << "--- Monte Carlo Pricing Comparison (European Call) ---\n";
-    std::cout << "S0: " << S0 << ", K: " << K << ", T: " << T << ", sigma: " << sigma << "\n";
-    std::cout << "Total Simulations (N): " << NUM_SIMULATIONS << "\n";
-    std::cout << "FDM Epsilon (d^S): " << EPSILON << "\n";
-    std::cout << "------------------------------------------------------\n";
-
-    // --- 3. OBJECT INSTANTIATION ---
-    RNG::getInstance(); 
-    
-    // On travaille avec l'objet concret EuropeanCall
-    EuropeanCall call_concrete(T, r, K); 
-    
-    // On peut utiliser la référence abstraite pour le pricer
-    const Option& call = call_concrete; 
-
-    GBM gbm(S0, STEPS, r, sigma); 
-
-    MonteCarloPricer pricer(call, gbm);
-    GreeksPricer greeks_pricer(call, gbm);
-
-    // 4. PRICING (STANDARD & MIN VAR)
-    
-    std::cout << "-> Pricing STANDARD ...\n";
-    PricingResult result_std = pricer.calculatePrice(NUM_SIMULATIONS);
-    // ... (affichage standard) ...
-    std::cout << "   Price V (Standard):      " << result_std.price << "\n";
-    std::cout << "   Standard Error (SEM):    " << result_std.standard_error << "\n";
-    
-    std::cout << "\n-> Pricing REDUCTION VARIANCE ...\n";
-    PricingResult result_minvar = pricer.calculatePriceMinVar(NUM_SIMULATIONS);
-    double sem_reduction = (result_std.standard_error - result_minvar.standard_error) / result_std.standard_error * 100.0;
-    std::cout << "   Price V (Min Var):       " << result_minvar.price << "\n";
-    std::cout << "   Standard Error (SEM):    " << result_minvar.standard_error << "\n";
-    std::cout << "   SEM Reduction achieved:  " << std::setprecision(2) << sem_reduction << "%" << std::setprecision(5) << "\n";
-
-    std::cout << "======================================================\n";
-    
-    // 6. GREEKS CALCULATION (Analytic Formulas)
-
-    std::cout << "-> GREEKS CALCULATION (ANALYTIC / Black-Scholes):\n";
-    
-    // TENTATIVE D'ACCÈS AUX MÉTHODES ANALYTIQUES VIA dynamic_cast
-    const AnalyticPriced* analytic_option = dynamic_cast<const AnalyticPriced*>(&call);
-
-    if (analytic_option) {
-        // L'objet est bien une option 'vanille' supportant l'analyse BS.
-        double delta_bs = analytic_option->getAnalyticDelta(S0, sigma);
-        double gamma_bs = analytic_option->getAnalyticGamma(S0, sigma);
-        double vega_bs = analytic_option->getAnalyticVega(S0, sigma);
-
-        std::cout << "   Delta (Analytic) :       " << delta_bs << "\n";
-        std::cout << "   Gamma (Analytic) :       " << gamma_bs << "\n";
-        std::cout << "   Vega (Analytic) :        " << vega_bs << "\n";
-    } else {
-        std::cout << "   [Option non analytique. Impossible d'utiliser les formules BS.]\n";
+/**
+ * @brief Sécurise la saisie d'un nombre double positif.
+ */
+double getSafeDouble(const std::string& prompt, bool allowZero = false) {
+    double value;
+    while (true) {
+        std::cout << prompt;
+        if (std::cin >> value && (allowZero ? value >= 0 : value > 0)) {
+            return value;
+        }
+        std::cout << "Erreur : Saisie invalide. Entrez un nombre " 
+                  << (allowZero ? ">= 0." : "> 0.") << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
-    
-    std::cout << "------------------------------------------------------\n";
-    
+}
 
+/**
+ * @brief Sécurise la saisie d'un entier dans une plage.
+ */
+int getSafeInt(const std::string& prompt, int min, int max) {
+    int value;
+    while (true) {
+        std::cout << prompt;
+        if (std::cin >> value && value >= min && value <= max) {
+            return value;
+        }
+        std::cout << "Erreur : Choix invalide (entre " << min << " et " << max << ")." << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+}
 
-    // Si tu es sur un environnement compatible, tu peux décommenter pour ouvrir le graphe direct :
-    // system("gnuplot plot_trajectory.gp");
+// --- LOGIQUE DE SELECTION D'OPTION ---
+
+std::unique_ptr<Option> createOption(double T, double r) {
+    std::cout << "\n--- CHOIX DE L'INSTRUMENT ---" << std::endl;
+    std::cout << "1. European Call" << std::endl;
+    std::cout << "2. European Put" << std::endl;
+    std::cout << "3. European Bull Call Spread (K1 < K2)" << std::endl;
+    std::cout << "4. European Butterfly Spread" << std::endl;
+    std::cout << "5. Asian Call (Moyenne Arithmetique)" << std::endl;
+    
+    int choice = getSafeInt("Selection : ", 1, 5);
+    double K, K2;
+
+    switch (choice) {
+        case 1: 
+            K = getSafeDouble(">> Strike K : ");
+            return std::make_unique<EuropeanCall>(T, r, K);
+        case 2: 
+            K = getSafeDouble(">> Strike K : ");
+            return std::make_unique<EuropeanPut>(T, r, K);
+        case 3: 
+            K = getSafeDouble(">> Strike K1 (achat) : ");
+            K2 = getSafeDouble(">> Strike K2 (vente) : ");
+            return std::make_unique<CallSpread>(T, r, K, K2); //
+        case 4: {
+            std::cout << "Un Butterfly nécessite trois strikes (K1 < K2 < K3)." << std::endl;
+            double K1 = getSafeDouble(">> Strike K1 (bas) : ");
+            double K2 = getSafeDouble(">> Strike K2 (milieu) : ");
+            double K3 = getSafeDouble(">> Strike K3 (haut) : ");
+            return std::make_unique<EuropeanButterFly>(T, r, K1, K2, K3);
+        }
+        case 5: 
+            K = getSafeDouble(">> Strike K : ");
+            return std::make_unique<AsianOption>(T, r, K); //
+        default: return nullptr;
+    }
+}
+
+// --- MAIN ---
+
+int main() {
+    std::cout << std::fixed << std::setprecision(5);
+    RNG::getInstance(); // Initialisation du générateur
+
+    std::cout << "================================================\n";
+    std::cout << "        PRICER MULTI-OPTIONS INTERACTIF         \n";
+    std::cout << "================================================\n";
+
+    // 1. Paramètres financiers
+    double S0 = getSafeDouble(">> Prix initial de l'actif (S0) : ");
+    double r  = getSafeDouble(">> Taux sans risque (r) [ex: 0.05] : ", true);
+    double sigma = getSafeDouble(">> Volatilite (sigma) [ex: 0.2] : ");
+    double T  = getSafeDouble(">> Maturite (T en annees) : ");
+
+    // 2. Instanciation de l'option (Polymorphisme)
+    std::unique_ptr<Option> selectedOption = createOption(T, r); //
+
+    // 3. Configuration du modèle GBM
+    int steps = getSafeInt(">> Nombre de pas de temps (discretisation) : ", 1, 1000);
+    GBM model(S0, steps, r, sigma); //
+
+    // 4. Moteurs de pricing
+    MonteCarloPricer pricer(*selectedOption, model); //
+    GreeksPricer greeks_pricer(*selectedOption, model); //
+
+    bool running = true;
+    while (running) {
+        std::cout << "\n---------------- MENU ACTIONS ----------------" << std::endl;
+        std::cout << "1. Simulation Monte Carlo Standard" << std::endl;
+        std::cout << "2. Simulation avec Reduction de Variance (Antithetique)" << std::endl;
+        std::cout << "3. Calcul des Grecs (Delta / Gamma)" << std::endl;
+        std::cout << "4. Generer Graphique de Trajectoire (PNG)" << std::endl;
+        std::cout << "0. Quitter" << std::endl;
+        
+        int action = getSafeInt("Choix : ", 0, 4);
+
+        if (action == 0) {
+            running = false;
+            continue;
+        }
+
+        if (action == 4) {
+            std::cout << "Exportation vers ../output/trajectory.png..." << std::endl;
+            GnuplotExporter::savePathPNG(model.generatePath(T), T, "trajectory.png"); //
+            continue;
+        }
+
+        int n_sims = getSafeInt(">> Nombre de simulations : ", 100, 10000000);
+
+        if (action == 1) {
+            auto res = pricer.calculatePrice(n_sims); //
+            std::cout << "\n[RESULTAT MC STANDARD]" << std::endl;
+            std::cout << "Prix estime : " << res.price << std::endl; //
+            std::cout << "Erreur standard : " << res.standard_error << std::endl;
+            std::cout << "IC 95% : [" << res.confidenceInterval95Lower() << " ; " << res.confidenceInterval95Upper() << "]" << std::endl;
+        } 
+        else if (action == 2) {
+            if (n_sims % 2 != 0) n_sims++; // Force un nombre pair pour les paires antitéthiques
+            auto res = pricer.calculatePriceMinVar(n_sims); //
+            std::cout << "\n[RESULTAT MC ANTITHETIQUE]" << std::endl;
+            std::cout << "Prix estime : " << res.price << std::endl;
+            std::cout << "Erreur standard : " << res.standard_error << " (Variance reduite)" << std::endl;
+        } 
+        else if (action == 3) {
+            double eps = 0.01 * S0;
+            double delta = greeks_pricer.calculateDelta(n_sims, eps); //
+            double gamma = greeks_pricer.calculateGamma(n_sims, eps); //
+            std::cout << "\n[SENSIBILITES (GREEKS)]" << std::endl;
+            std::cout << "Delta : " << delta << std::endl;
+            std::cout << "Gamma : " << gamma << std::endl;
+        }
+    }
+
+    std::cout << "\nFermeture du programme. Bonne journee !" << std::endl;
     return 0;
 }
