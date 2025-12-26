@@ -4,6 +4,7 @@
 #include "AssetModel.hpp" 
 #include "RNG.hpp"        
 
+
 /**
  * @brief Represents the Geometric Brownian Motion model for asset price simulation.
  * * It is a concrete implementation of AssetModel.

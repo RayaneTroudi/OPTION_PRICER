@@ -20,6 +20,8 @@
 #include "PricingEngine/PricingResult.hpp"
 #include "PricingEngine/GreeksPricer.hpp" 
 
+// --- UTILITIES ---
+#include "Utils/GnuplotExporter.hpp"
 
 int main() {
     
@@ -55,6 +57,7 @@ int main() {
     const Option& call = call_concrete; 
 
     GBM gbm(S0, STEPS, r, sigma); 
+
     MonteCarloPricer pricer(call, gbm);
     GreeksPricer greeks_pricer(call, gbm);
 
@@ -97,26 +100,9 @@ int main() {
     
     std::cout << "------------------------------------------------------\n";
     
-    // 7. GREEKS CALCULATION (FDM)
-    
-    std::cout << "-> GREEKS CALCULATION (NUMERIC / FDM):\n";
-    
-    double delta_fdm = greeks_pricer.calculateDelta(NUM_SIMULATIONS, EPSILON);
-    double gamma_fdm = greeks_pricer.calculateGamma(NUM_SIMULATIONS, EPSILON);
-    
-    std::cout << "   Delta (FDM) :            " << delta_fdm << "\n";
-    std::cout << "   Gamma (FDM) :            " << gamma_fdm << "\n";
-    
-    std::cout << "------------------------------------------------------\n";
 
-    AsianOption asian_call(T, r, K);
-    const Option& asian_option = asian_call;
-    MonteCarloPricer asian_pricer(asian_option, gbm);
-    std::cout << "-> Pricing Asian Call Option (Arithmetic Average):\n";
-    PricingResult asian_result = asian_pricer.calculatePrice(NUM_SIMULATIONS);
-    std::cout << "   Price V (Asian Call):    " << asian_result.price << "\n";
-    std::cout << "   Standard Error (SEM):    " << asian_result.standard_error << "\n";
 
-    
+    // Si tu es sur un environnement compatible, tu peux décommenter pour ouvrir le graphe direct :
+    // system("gnuplot plot_trajectory.gp");
     return 0;
 }

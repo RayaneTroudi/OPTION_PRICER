@@ -1,43 +1,34 @@
 cmake_minimum_required(VERSION 3.10)
-
 project(OptionPricer LANGUAGES CXX)
 
+# --- 1. CONFIGURATION DU COMPILATEUR (Spécifique macOS) ---
+if(APPLE)
+    # Débloque std::filesystem sur macOS
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15")
+endif()
+
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-# --- 1. Configuration du code métier (Bibliothèque statique) ---
-
-# Inclut le répertoire 'include/' pour que le compilateur trouve les en-têtes
+# --- 2. CONFIGURATION DE LA BIBLIOTHÈQUE ---
+# Inclut tous les .cpp du dossier src/ pour créer la lib métier
 include_directories(include) 
-
-# Utilisation de GLOB_RECURSE pour capturer TOUS les fichiers .cpp 
-# dans le dossier 'src/' et tous ses sous-dossiers (Options, PricingEngine, Utils, etc.)
 file(GLOB_RECURSE PRICER_LIB_SRC "src/*.cpp")
 
-# Crée la bibliothèque statique 'pricer_lib' à partir de tous les fichiers sources trouvés
 add_library(pricer_lib ${PRICER_LIB_SRC}) 
-
-# Définit le chemin d'inclusion pour la bibliothèque 
 target_include_directories(pricer_lib PUBLIC include) 
 
+# --- 3. DÉFINITION DES EXÉCUTABLES ---
 
-# --- 2. Définition de l'Exécutable Principal (pricer_test) ---
-
-# L'exécutable utilise uniquement main.cpp comme point d'entrée
+# A. Pricing classique
 add_executable(pricer_test main.cpp)
-
-# Lie l'exécutable à la bibliothèque pricer_lib
-# Ceci est crucial : cela garantit que tous les symboles de vos classes (.cpp) sont trouvés
 target_link_libraries(pricer_test pricer_lib)
 
-# --- 3. Configuration des Tests (Optionnel, mais bonne pratique) ---
-# Vous pouvez réutiliser pricer_lib pour lier les tests GTest
+# B. Tracé de trajectoire (nécessite apps/plot_path.cpp)
+add_executable(plot_path apps/plot_path.cpp)
+target_link_libraries(plot_path pricer_lib)
 
-# if(EXISTS "tests")
-#     add_subdirectory(vendor/googletest)
-#     enable_testing()
-# 
-#     add_executable(run_tests tests/test_myoption.cpp)
-#     target_link_libraries(run_tests pricer_lib GTest::gtest_main)
-#     add_test(NAME MyTests COMMAND run_tests)
-# endif()
+# C. Convergence et Réduction de Variance (nécessite apps/show_convergence.cpp)
+add_executable(show_convergence apps/show_convergence.cpp)
+target_link_libraries(show_convergence pricer_lib)

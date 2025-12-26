@@ -88,3 +88,5 @@ std::pair<Path, Path> GBM::generateMinVarPaths(double T) const {
     // 4. Retourner la paire de chemins
     return std::make_pair(Path(prices_std), Path(prices_anti));
 }
+
+
