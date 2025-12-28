@@ -64,3 +64,40 @@ void GnuplotExporter::saveConvergencePNG(const std::vector<double>& stdP,
 
     std::system("gnuplot ../output/render_conv.gp");
 }
+
+void GnuplotExporter::saveEDPCurvePNG(const std::vector<double>& s_values, 
+                                     const std::vector<double>& v_values, 
+                                     const std::string& filename) {
+    std::string folder = "../output/";
+    
+    // 1. Écriture des données
+    std::ofstream dataFile(folder + "edp_data.dat");
+    if (!dataFile.is_open()) return; // Sécurité simple
+    
+    for (size_t i = 0; i < s_values.size(); ++i) {
+        dataFile << s_values[i] << " " << v_values[i] << "\n";
+    }
+    dataFile.close();
+
+    // 2. Écriture du script Gnuplot
+    std::ofstream scriptFile(folder + "plot_edp.gp");
+    if (!scriptFile.is_open()) return;
+
+    scriptFile << "set terminal pngcairo\n";
+    scriptFile << "set output \"" << folder << filename << "\"\n"; // Utilisation de guillemets doubles
+    
+    // CORRECTION : Utilisation de \" pour inclure l'apostrophe dans le titre
+    scriptFile << "set title \"Prix de l'option via EDP (t=0)\"\n"; 
+    
+    scriptFile << "set xlabel \"Prix de l'actif (S)\"\n";
+    scriptFile << "set ylabel \"Valeur de l'option (V)\"\n";
+    scriptFile << "set grid\n"; // Optionnel : ajoute une grille pour la lisibilité
+    
+    scriptFile << "plot \"" << folder << "edp_data.dat\" with lines lw 2 lc rgb 'blue' title \"Solution EDP\"\n";
+    scriptFile.close();
+
+    // 3. Exécution de Gnuplot
+    // Utilisation de guillemets pour le chemin du script au cas où il y aurait des espaces
+    std::string command = "gnuplot \"" + folder + "plot_edp.gp\"";
+    std::system(command.c_str());
+}

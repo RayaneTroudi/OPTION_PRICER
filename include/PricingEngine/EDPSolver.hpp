@@ -10,6 +10,7 @@
  * Utilise la méthode des Différences Finies.
  */
 class EDPSolver {
+
 public:
     // On passe le modèle GBM pour récupérer mu (r) et sigma
     EDPSolver(const Option& option_in, const GBM& model_in);
@@ -23,9 +24,18 @@ public:
      */
     double solve(double S_max, int M, int N) const;
 
+
+    /**
+     * @brief Calcule la courbe complète du prix de l'option par rapport à S.
+     * @return Une paire contenant le vecteur des prix S et le vecteur des valeurs V.
+     */
+    std::pair<std::vector<double>, std::vector<double>> calculateEDPCurve(double S_max, int M, int N) const;
+
 private:
+
     const Option& option;
     const GBM& model;
+
 };
 
 #endif

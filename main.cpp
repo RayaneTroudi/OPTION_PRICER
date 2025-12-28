@@ -21,6 +21,7 @@
 #include "Models/RNG.hpp"
 #include "PricingEngine/MonteCarloPricer.hpp"
 #include "PricingEngine/GreeksPricer.hpp"
+#include "PricingEngine/EDPSolver.hpp"
 
 // --- UTILS ---
 #include "Utils/GnuplotExporter.hpp"
@@ -62,7 +63,7 @@ int getSafeInt(const std::string& prompt, int min, int max) {
 
 // --- LOGIQUE DE SELECTION D'OPTION ---
 
-std::unique_ptr<Option> createOption(double T, double r) {
+std::unique_ptr<Option> createOption(double T, double r, bool& outIsVanilla) {
     std::cout << "\n--- CHOIX DE L'INSTRUMENT ---" << std::endl;
     std::cout << "1. European Call" << std::endl;
     std::cout << "2. European Put" << std::endl;
@@ -71,30 +72,28 @@ std::unique_ptr<Option> createOption(double T, double r) {
     std::cout << "5. Asian Call (Moyenne Arithmetique)" << std::endl;
     
     int choice = getSafeInt("Selection : ", 1, 5);
-    double K, K2;
+    
+    // On marque si c'est une option compatible avec notre solveur EDP actuel
+    outIsVanilla = (choice == 1 || choice == 2);
 
     switch (choice) {
         case 1: 
-            K = getSafeDouble(">> Strike K : ");
-            return std::make_unique<EuropeanCall>(T, r, K);
+            return std::make_unique<EuropeanCall>(T, r, getSafeDouble(">> Strike K : "));
         case 2: 
-            K = getSafeDouble(">> Strike K : ");
-            return std::make_unique<EuropeanPut>(T, r, K);
+            return std::make_unique<EuropeanPut>(T, r, getSafeDouble(">> Strike K : "));
         case 3: 
-            K = getSafeDouble(">> Strike K1 (achat) : ");
-            K2 = getSafeDouble(">> Strike K2 (vente) : ");
-            return std::make_unique<CallSpread>(T, r, K, K2); //
+            return std::make_unique<CallSpread>(T, r, getSafeDouble(">> K1 : "), getSafeDouble(">> K2 : "));
         case 4: {
             std::cout << "Un Butterfly nécessite trois strikes (K1 < K2 < K3)." << std::endl;
-            double K1 = getSafeDouble(">> Strike K1 (bas) : ");
-            double K2 = getSafeDouble(">> Strike K2 (milieu) : ");
-            double K3 = getSafeDouble(">> Strike K3 (haut) : ");
+            double K1 = getSafeDouble(">> K1 (bas) : ");
+            double K2 = getSafeDouble(">> K2 (milieu) : ");
+            double K3 = getSafeDouble(">> K3 (haut) : ");
             return std::make_unique<EuropeanButterFly>(T, r, K1, K2, K3);
         }
         case 5: 
-            K = getSafeDouble(">> Strike K : ");
-            return std::make_unique<AsianOption>(T, r, K); //
-        default: return nullptr;
+            return std::make_unique<AsianOption>(T, r, getSafeDouble(">> Strike K : "));
+        default: 
+            return nullptr;
     }
 }
 
@@ -102,7 +101,7 @@ std::unique_ptr<Option> createOption(double T, double r) {
 
 int main() {
     std::cout << std::fixed << std::setprecision(5);
-    RNG::getInstance(); // Initialisation du générateur
+    RNG::getInstance(); 
 
     std::cout << "================================================\n";
     std::cout << "        PRICER MULTI-OPTIONS INTERACTIF         \n";
@@ -115,15 +114,16 @@ int main() {
     double T  = getSafeDouble(">> Maturite (T en annees) : ");
 
     // 2. Instanciation de l'option (Polymorphisme)
-    std::unique_ptr<Option> selectedOption = createOption(T, r); //
+    bool isVanilla = false;
+    std::unique_ptr<Option> selectedOption = createOption(T, r, isVanilla);
 
     // 3. Configuration du modèle GBM
     int steps = getSafeInt(">> Nombre de pas de temps (discretisation) : ", 1, 1000);
-    GBM model(S0, steps, r, sigma); //
+    GBM model(S0, steps, r, sigma);
 
     // 4. Moteurs de pricing
-    MonteCarloPricer pricer(*selectedOption, model); //
-    GreeksPricer greeks_pricer(*selectedOption, model); //
+    MonteCarloPricer pricer(*selectedOption, model);
+    GreeksPricer greeks_pricer(*selectedOption, model);
 
     bool running = true;
     while (running) {
@@ -132,9 +132,15 @@ int main() {
         std::cout << "2. Simulation avec Reduction de Variance (Antithetique)" << std::endl;
         std::cout << "3. Calcul des Grecs (Delta / Gamma)" << std::endl;
         std::cout << "4. Generer Graphique de Trajectoire (PNG)" << std::endl;
+        
+        // Action spécifique à l'EDP pour Call/Put
+        if (isVanilla) {
+            std::cout << "5. Generer Courbe de Prix EDP (PNG)" << std::endl;
+        }
+        
         std::cout << "0. Quitter" << std::endl;
         
-        int action = getSafeInt("Choix : ", 0, 4);
+        int action = getSafeInt("Choix : ", 0, isVanilla ? 5 : 4);
 
         if (action == 0) {
             running = false;
@@ -143,30 +149,40 @@ int main() {
 
         if (action == 4) {
             std::cout << "Exportation vers ../output/trajectory.png..." << std::endl;
-            GnuplotExporter::savePathPNG(model.generatePath(T), T, "trajectory.png"); //
+            GnuplotExporter::savePathPNG(model.generatePath(T), T, "trajectory.png");
+            continue;
+        }
+
+        if (action == 5 && isVanilla) {
+            std::cout << "Calcul de la grille EDP et generation du graphique..." << std::endl;
+            EDPSolver edp(*selectedOption, model);
+            // S_max réglé à 2.5 fois S0 pour voir l'allure de la courbe
+            auto curve = edp.calculateEDPCurve(S0 * 2.5, 200, 2000);
+            GnuplotExporter::saveEDPCurvePNG(curve.first, curve.second, "edp_option_price.png");
+            std::cout << "Graphique genere dans ../output/edp_option_price.png" << std::endl;
             continue;
         }
 
         int n_sims = getSafeInt(">> Nombre de simulations : ", 100, 10000000);
 
         if (action == 1) {
-            auto res = pricer.calculatePrice(n_sims); //
+            auto res = pricer.calculatePrice(n_sims);
             std::cout << "\n[RESULTAT MC STANDARD]" << std::endl;
-            std::cout << "Prix estime : " << res.price << std::endl; //
+            std::cout << "Prix estime : " << res.price << std::endl;
             std::cout << "Erreur standard : " << res.standard_error << std::endl;
             std::cout << "IC 95% : [" << res.confidenceInterval95Lower() << " ; " << res.confidenceInterval95Upper() << "]" << std::endl;
         } 
         else if (action == 2) {
-            if (n_sims % 2 != 0) n_sims++; // Force un nombre pair pour les paires antitéthiques
-            auto res = pricer.calculatePriceMinVar(n_sims); //
+            if (n_sims % 2 != 0) n_sims++; 
+            auto res = pricer.calculatePriceMinVar(n_sims);
             std::cout << "\n[RESULTAT MC ANTITHETIQUE]" << std::endl;
             std::cout << "Prix estime : " << res.price << std::endl;
             std::cout << "Erreur standard : " << res.standard_error << " (Variance reduite)" << std::endl;
         } 
         else if (action == 3) {
             double eps = 0.01 * S0;
-            double delta = greeks_pricer.calculateDelta(n_sims, eps); //
-            double gamma = greeks_pricer.calculateGamma(n_sims, eps); //
+            double delta = greeks_pricer.calculateDelta(n_sims, eps);
+            double gamma = greeks_pricer.calculateGamma(n_sims, eps);
             std::cout << "\n[SENSIBILITES (GREEKS)]" << std::endl;
             std::cout << "Delta : " << delta << std::endl;
             std::cout << "Gamma : " << gamma << std::endl;
