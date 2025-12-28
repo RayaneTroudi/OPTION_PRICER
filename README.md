@@ -33,6 +33,8 @@ Ouvrez un terminal à la racine du projet et exécutez :
   cmake ..
   make
 
+Veuillez aussi à installer gnuplot pour la partie graphique !
+
 5. EXECUTION DES OUTILS
 -----------------------
 Une fois la compilation terminée, trois outils sont disponibles :
@@ -40,6 +42,7 @@ Une fois la compilation terminée, trois outils sont disponibles :
   A. Interface Interactive :
      ./pricer_test
      (Permet de configurer S0, r, sigma, T et de choisir l'option).
+     il s'agit de l'exécutable principale
 
   B. Etude de Convergence :
      ./show_convergence
@@ -48,6 +51,9 @@ Une fois la compilation terminée, trois outils sont disponibles :
   C. Comparaison MC vs EDP :
      ./compare_mc_edp
      (Étude asymptotique entre approche stochastique et numérique).
+
+  D. Plot via GNU le chemin du sous jacent
+     ./plot_path
 
 6. NOTES TECHNIQUES
 -------------------
@@ -58,5 +64,5 @@ Une fois la compilation terminée, trois outils sont disponibles :
   * RNG : Utilisation du générateur Mersenne Twister (mt19937).
 
 ------------------------------------------------------------------------
-Développé par Rayane Troudi - Projet C++ ENSAE
+Développé par Rayane Troudi - Jassiem Zouga - Ella Ben-Said Projet C++ ENSAE
 ========================================================================
